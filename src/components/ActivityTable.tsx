@@ -4,6 +4,9 @@ import { ErrorMessage } from "./ErrorMessage";
 import { Loading } from "./Loading";
 import { useEffect, useState } from "react";
 import { ActivityType } from "../hooks/useCreateActivity";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+
 
 export function ActivityTable() {
     const { data: Activity, isLoading, error } = useGetActivity();
@@ -48,13 +51,15 @@ export function ActivityTable() {
             renderCell: () => {
                 return (
                     <div className="flex gap-1 justify-center mt-2">
-                        <button className="text-xs p-1 bg-green-100 rounded-md 
-                        text-white hover:bg-green-300"><img src="../src/assets/edit.svg" alt="Editar" /></button>
-                        <button className="text-xs p-1 bg-red-100 rounded-md
-                        text-white hover:bg-red-300"><img src="../src/assets/delete.svg" alt="Eliminar" /></button>
+                        <button className="text-xs p-1 bg-green-600 rounded-md text-white hover:bg-green-700">
+                            <FontAwesomeIcon icon={faEdit} />
+                        </button>
+                        <button className="text-xs p-1 bg-red-600 rounded-md text-white hover:bg-red-700">
+                            <FontAwesomeIcon icon={faTrash} />
+                        </button>
                     </div>
                 );
-            }
+            }            
         }
     ];
 
