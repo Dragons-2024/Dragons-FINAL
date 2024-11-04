@@ -38,7 +38,7 @@ export function ActivityTable() {
                 );
             },
         },
-        { field: "ContactUser", headerName: "Ejecutivo Comercial", width: 150, headerAlign: 'center' },
+        { field: "ContactUser", headerName: "Ejecutivo Comercial", width: 170, headerAlign: 'center' },
         { field: "Description", headerName: "Descripción", width: 300, headerAlign: 'center' },
         { 
             field: "Actions", 
@@ -69,23 +69,23 @@ export function ActivityTable() {
     if (activities !== undefined) {
         if (activities.length > 0) {
             return (
-                <div className="w-11/12 mx-auto my-10 text-center" style={{ overflowX: 'auto' }}>
+                <div className="w-full mx-auto my-10 text-center" style={{ overflowX: 'auto' }}>
                     <DataGrid 
                         columns={columns} 
                         rows={activities} 
-                        autoHeight
                         sx={{
+                            fontFamily:'poppins',
                             border: 'none',
                             '& .MuiDataGrid-cell': {
                                 bgcolor: 'background.default', 
                                 borderBottom: '1px solid rgba(224, 224, 224, 1)', 
-                                textAlign: 'center', // Centrar el contenido de las celdas
+                                textAlign: 'center', 
                             },
                             '& .MuiDataGrid-columnHeader': {
                                 bgcolor: '#4A5FD9', 
                                 color: 'white', 
-                                textAlign: 'center', // Centrar el contenido de los encabezados
-                                justifyContent: 'center', // Centrar los encabezados
+                                textAlign: 'center', 
+                                justifyContent: 'center', 
                             },
                             '& .MuiDataGrid-footerCell': {
                                 borderTop: 'none', 

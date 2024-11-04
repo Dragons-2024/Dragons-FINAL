@@ -8,7 +8,7 @@ interface WindowDialogueProps {
 export function WindowDialogue({ open, setclose }: WindowDialogueProps) {
   return (
     <div
-      className={`fixed inset-0 flex flex-col  justify-center items-center z-10 ${
+      className={`fixed inset-0 flex flex-col  justify-center items-center z-10 font-poppins ${
         open ? "visible bg-black/20" : "invisible"
       }`}
     >

@@ -152,8 +152,8 @@ export function ActivityForm({setclose}:ActivityFormProps) {
           placeholder="Describe las conclusiones del seguimiento"
           className=" bg-blue-100 border border-gray-300 rounded-md focus:outline-none p-2 text-gray-700 placeholder-gray-500 focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
         ></textarea>
-        <button className="px-7 py-2 border-2 bg-blue-700 hover:bg-blue-900 text-white 
-        border-blue-700 hover:border-blue-900 rounded-lg my-2">Crear</button>
+        <button className="px-7 py-2 border-2 bg-[#4A5FD9] hover:bg-blue-900 text-white 
+        border-[#4A5FD9] hover:border-blue-900 rounded-lg my-2">Guardar</button>
       </section>
     </form>
   );

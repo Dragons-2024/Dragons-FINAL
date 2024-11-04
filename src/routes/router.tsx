@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
         errorElement: <div>404 Not Found</div>
     },
     {
-        path:"/activities",
+        path:"/seguimiento",
         element:<Activities/>,
         errorElement: <div>404 Not Found</div>
     }
