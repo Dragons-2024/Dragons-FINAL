@@ -20,7 +20,7 @@ export function WindowDialogue({ open, setclose }: WindowDialogueProps) {
             className="absolute right-2 top-2"
           />
         </button>
-        <h1 className="text-3xl text-center text-blue-600">Crear Seguimiento</h1>
+        <h1 className="text-3xl text-center text-[#4A5FD9]">Crear Seguimiento</h1>
         <ActivityForm setclose={setclose}/>
       </div>
     </div>

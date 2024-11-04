@@ -1,5 +1,5 @@
 import { useForm, useFieldArray } from "react-hook-form";
-import { ActivityType, useCreateActivity } from "../hooks/useCreateActivity";
+import {  useCreateActivity } from "../hooks/useCreateActivity";
 
 export type ActivityFormType = {
   ContactType:string;
@@ -27,7 +27,7 @@ setclose:()=>void;
 }
 
 export function ActivityForm({setclose}:ActivityFormProps) {
-  const { mutate: CreateActivity, isSuccess,isError } = useCreateActivity();
+  const { mutate: CreateActivity,isError } = useCreateActivity();
   const { register,handleSubmit,control,reset,   formState: { errors },
   } = useForm<ActivityFormType>();
 
@@ -97,8 +97,8 @@ export function ActivityForm({setclose}:ActivityFormProps) {
         <button
           type="button"
           onClick={() => append({ name: "" })}
-          className="mt-2 px-4 py-2 my-3 bg-blue-500 text-white rounded-md 
-          hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="mt-2 px-4 py-2 my-3 bg-[#4A5FD9] text-white rounded-md 
+          hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
         >
           Añadir Cliente
         </button>
@@ -128,14 +128,14 @@ export function ActivityForm({setclose}:ActivityFormProps) {
     </section>
 
       <section className="flex flex-col gap-2">
-        <label htmlFor="User" className="text-gray-700 font-semibold">
+        <label htmlFor="User" className="text-gray-700 font-semibold ">
           Ejecutivo Comercial:
         </label>
         <input
           type="text"
           id="User"
           {...register("ContactUser",{required:true})}
-          className="bg-blue-100 border border-gray-300 rounded-md p-2 focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
+          className="bg-blue-100 border border-gray-300 focus:outline-none rounded-md p-2 focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
         />
         {errors.ContactUser && (
               <p className="text-[#FF0000] text-xs mx-1">Campo obligatorio</p>
@@ -150,7 +150,7 @@ export function ActivityForm({setclose}:ActivityFormProps) {
           id="Description"
           {...register("Description")}
           placeholder="Describe las conclusiones del seguimiento"
-          className="bg-blue-100 border border-gray-300 rounded-md p-2 text-gray-700 placeholder-gray-500 focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
+          className=" bg-blue-100 border border-gray-300 rounded-md focus:outline-none p-2 text-gray-700 placeholder-gray-500 focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
         ></textarea>
         <button className="px-7 py-2 border-2 bg-blue-700 hover:bg-blue-900 text-white 
         border-blue-700 hover:border-blue-900 rounded-lg my-2">Crear</button>
