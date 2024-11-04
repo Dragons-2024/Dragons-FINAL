@@ -48,7 +48,7 @@ export const ClientList: React.FC = () => {
           Crear Cliente
         </Link>
       </div>
-      <div className="overflow-hidden">
+      <div className="overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-200 shadow-lg">
           <thead>
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
