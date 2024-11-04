@@ -13,6 +13,7 @@ export const FormClient: React.FC = () => {
     activo: true,
   });
 
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -22,12 +23,36 @@ export const FormClient: React.FC = () => {
     });
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
+    setSuccessMessage('Cliente creado exitosamente');
+    
+    setCliente({
+      nit: '',
+      nombre: '',
+      direccion: '',
+      ciudad: '',
+      pais: '',
+      telefono: '',
+      correoCorporativo: '',
+      activo: true,
+    });
+    
+    setTimeout(() => setSuccessMessage(null), 3000);
+  };
 
   return (
     <div className="max-w-3xl mx-auto mt-12 p-6 bg-white rounded-lg shadow-md font-poppins">
       <h2 className="text-2xl font-bold mb-6 text-center">Crear Nuevo Cliente</h2>
-      <form className="space-y-4">
+      
+      {successMessage && (
+        <div className="text-green-600 text-center mb-4 font-bold">
+          {successMessage}
+        </div>
+      )}
+
+      <form className="space-y-4" onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-gray-700">NIT</label>
