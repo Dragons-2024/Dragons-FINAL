@@ -14,7 +14,7 @@ export function Header() {
                 </nav>
             </div>
             <div className="flex items-center justify-center flex-grow">
-                <img src="/src/assets/logodragons.png" alt="Logo" className="h-20 w-auto" />
+                <img src="https://res.cloudinary.com/dlrjuallw/image/upload/v1730684999/logodragons_r1ns4o.png" alt="Logo" className="h-20 w-auto" />
                 
             </div>
             <div className="flex items-center">
