@@ -25,7 +25,7 @@ export const FormClient: React.FC = () => {
 
 
   return (
-    <div className="max-w-3xl mx-auto mt-12 p-6 bg-white rounded-lg shadow-md">
+    <div className="max-w-3xl mx-auto mt-12 p-6 bg-white rounded-lg shadow-md font-poppins">
       <h2 className="text-2xl font-bold mb-6 text-center">Crear Nuevo Cliente</h2>
       <form className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
