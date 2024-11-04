@@ -1,9 +1,40 @@
 import { useState } from "react";
 import { Cliente } from "../core/interface/client";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faToggleOn, faToggleOff } from '@fortawesome/free-solid-svg-icons';
 
 export const ClientList: React.FC = () => {
-  const [clientes] = useState<Cliente[]>([]);
+  const [clientes] = useState<Cliente[]>([
+    {
+      nit: "123456789",
+      nombre: "Empresa XYZ S.A.",
+      direccion: "Calle Falsa 123",
+      ciudad: "Ciudad Falsa",
+      pais: "Falsolandia",
+      telefono: "123-456-7890",
+      correoCorporativo: "contacto@empresaxyz.com",
+      activo: true,
+    },
+    {
+      nit: "987654321",
+      nombre: "Compañía ABC Ltda.",
+      direccion: "Avenida Siempre Viva 742",
+      ciudad: "Springfield",
+      pais: "EE.UU.",
+      telefono: "098-765-4321",
+      correoCorporativo: "info@companiaabc.com",
+      activo: false,
+    },
+  ]);
+
+  const handleUpdate = (clienteNit: string) => {
+    console.log(`Actualizar cliente con NIT: ${clienteNit}`);
+  };
+
+  const handleToggleActive = (clienteNit: string) => {
+    console.log(`Inactivar/activar cliente con NIT: ${clienteNit}`);
+  };
 
   return (
     <div className="p-4 font-poppins">
@@ -16,24 +47,25 @@ export const ClientList: React.FC = () => {
           Crear Cliente
         </Link>
       </div>
-      <div className="overflow-x-auto">
+      <div className="overflow-hidden">
         <table className="min-w-full bg-white border border-gray-200 shadow-lg">
           <thead>
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-              <th className="py-3 px-6 text-left">NIT</th>
-              <th className="py-3 px-6 text-left">Nombre</th>
-              <th className="py-3 px-6 text-left">Dirección</th>
-              <th className="py-3 px-6 text-left">Ciudad</th>
-              <th className="py-3 px-6 text-left">País</th>
-              <th className="py-3 px-6 text-left">Teléfono</th>
-              <th className="py-3 px-6 text-left">Correo</th>
+              <th className="py-3 px-6 text-center">NIT</th>
+              <th className="py-3 px-6 text-center">Nombre</th>
+              <th className="py-3 px-6 text-center">Dirección</th>
+              <th className="py-3 px-6 text-center">Ciudad</th>
+              <th className="py-3 px-6 text-center">País</th>
+              <th className="py-3 px-6 text-center">Teléfono</th>
+              <th className="py-3 px-6 text-center">Correo</th>
               <th className="py-3 px-6 text-center">Activo</th>
+              <th className="py-3 px-6 text-center">Acciones</th>
             </tr>
           </thead>
           <tbody className="text-gray-700 text-sm font-light">
             {clientes.map((cliente) => (
               <tr
-                key={cliente.id}
+                key={cliente.nit}
                 className="border-b border-gray-200 hover:bg-gray-100"
               >
                 <td className="py-3 px-6 text-left whitespace-nowrap">
@@ -53,6 +85,23 @@ export const ClientList: React.FC = () => {
                   ) : (
                     <span className="text-red-500 font-bold">No</span>
                   )}
+                </td>
+                <td className="py-3 px-6 text-center flex justify-center space-x-2">
+                  <button
+                    onClick={() => handleUpdate(cliente.nit)}
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded inline-flex items-center"
+                  >
+                    <FontAwesomeIcon icon={faEdit} className="mr-1" />
+                    Actualizar
+                  </button>
+                  <button
+                    onClick={() => handleToggleActive(cliente.nit)}
+                    className={`font-bold py-1 px-2 rounded inline-flex items-center ${cliente.activo ? "bg-red-500 hover:bg-red-600" : "bg-green-500 hover:bg-green-600"
+                      } text-white`}
+                  >
+                    <FontAwesomeIcon icon={cliente.activo ? faToggleOff : faToggleOn} className="mr-1" />
+                    {cliente.activo ? "Inactivar" : "Activar"}
+                  </button>
                 </td>
               </tr>
             ))}
