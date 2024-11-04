@@ -14,6 +14,7 @@ export const FormClient: React.FC = () => {
   });
 
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -26,8 +27,23 @@ export const FormClient: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (
+      !cliente.nit ||
+      !cliente.nombre ||
+      !cliente.direccion ||
+      !cliente.ciudad ||
+      !cliente.pais ||
+      !cliente.telefono ||
+      !cliente.correoCorporativo
+    ) {
+      setErrorMessage('Por favor, complete todos los campos requeridos.');
+      setSuccessMessage(null);
+      return;
+    }
+
     setSuccessMessage('Cliente creado exitosamente');
-    
+    setErrorMessage(null);
+
     setCliente({
       nit: '',
       nombre: '',
@@ -38,7 +54,7 @@ export const FormClient: React.FC = () => {
       correoCorporativo: '',
       activo: true,
     });
-    
+
     setTimeout(() => setSuccessMessage(null), 3000);
   };
 
@@ -49,6 +65,12 @@ export const FormClient: React.FC = () => {
       {successMessage && (
         <div className="text-green-600 text-center mb-4 font-bold">
           {successMessage}
+        </div>
+      )}
+
+      {errorMessage && (
+        <div className="text-red-600 text-center mb-4 font-bold">
+          {errorMessage}
         </div>
       )}
 
