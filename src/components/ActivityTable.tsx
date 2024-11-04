@@ -82,8 +82,10 @@ export function ActivityTable() {
                                 textAlign: 'center', 
                             },
                             '& .MuiDataGrid-columnHeader': {
-                                bgcolor: '#4A5FD9', 
-                                color: 'white', 
+                                fontSize:'0.8em',
+                                textTransform:'uppercase',
+                                bgcolor: '#e5e7eb', 
+                                color: '#4b5563', 
                                 textAlign: 'center', 
                                 justifyContent: 'center', 
                             },
