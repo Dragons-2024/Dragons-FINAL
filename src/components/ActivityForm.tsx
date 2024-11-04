@@ -1,7 +1,7 @@
 import { useForm, useFieldArray } from "react-hook-form";
-import { ClientArray } from "./ClientArray";
+import { ActivityType, useCreateActivity } from "../hooks/useCreateActivity";
 
-type FormValues = {
+export type ActivityFormType = {
   ContactType:string;
   ContactDate:Date;
   Client: {
@@ -22,21 +22,38 @@ const TypeContact: TypeContactProps[] = [
   { id: 3, name: "Reunion Presencial" },
 ];
 
-export function ActivityForm() {
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm<FormValues>();
+interface ActivityFormProps{
+setclose:()=>void;
+}
+
+export function ActivityForm({setclose}:ActivityFormProps) {
+  const { mutate: CreateActivity, isSuccess,isError } = useCreateActivity();
+  const { register,handleSubmit,control,reset,   formState: { errors },
+  } = useForm<ActivityFormType>();
 
   const { fields, append, remove } = useFieldArray({
     name: "Client",
     control,
   });
 
+  const onSubmit = (data: ActivityFormType) => {
+    console.log("Activity Information: ", data);
+    CreateActivity({
+      ...data,
+      id: Math.floor(Math.random() * 1000),
+    });
+     setclose();
+      reset();
+  };
+
   return (
-    <form className="flex flex-col gap-6 p-6 bg-white rounded-lg shadow-md">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6 p-6 bg-white rounded-lg shadow-md">
+        {isError && (
+          <p className="mx-auto p-2 text-red-500 ">
+            Error al crear actividad
+          </p>
+        )}
+      
       <section className="flex flex-col gap-2">
         <label htmlFor="ContactType" className="text-gray-700 font-semibold">
           Tipo de Contacto:
@@ -64,6 +81,9 @@ export function ActivityForm() {
           {...register("ContactDate",{required:true})}
           className="bg-blue-100 border border-gray-300 rounded-md p-2 focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
         />
+        {errors.ContactDate && (
+              <p className="text-[#FF0000] text-xs mx-1">Campo obligatorio</p>
+            )}
       </section>
 
       <section className="w-full">
@@ -117,6 +137,9 @@ export function ActivityForm() {
           {...register("ContactUser",{required:true})}
           className="bg-blue-100 border border-gray-300 rounded-md p-2 focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
         />
+        {errors.ContactUser && (
+              <p className="text-[#FF0000] text-xs mx-1">Campo obligatorio</p>
+            )}
       </section>
 
       <section className="flex flex-col gap-2">

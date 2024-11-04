@@ -25,7 +25,6 @@ export function ClientArray() {
 
   return (
     <section className="w-full">
-      {/* Clientes Asociados */}
       <div>
         <label
           htmlFor="ContactClient"
