@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {WindowDialogue} from "../components/WindowDialogue";
 import { Main } from "../layout/Main";
+import { ActivityTable } from "../components/ActivityTable";
 
 export function Activities(){
     const [Window,setWindow]=useState(false);
@@ -15,7 +16,7 @@ export function Activities(){
         <button className="ml-10 p-2 bg-[#4A5FD9] rounded-md text-white hover:bg-blue-700"
         onClick={()=>setWindow(true)}>Crear Seguimiento</button>
         <WindowDialogue open={Window} setclose={setclose}/>
-        
+        <ActivityTable/>
         </Main>
         
     );

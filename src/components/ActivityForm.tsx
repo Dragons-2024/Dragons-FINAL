@@ -89,7 +89,7 @@ export function ActivityForm({setclose}:ActivityFormProps) {
       <section className="w-full">
       <div>
         <label
-          htmlFor="ContactClient"
+          htmlFor="Client"
           className="block text-gray-700 font-semibold mb-2"
         >
           Clientes Asociados:
@@ -105,7 +105,7 @@ export function ActivityForm({setclose}:ActivityFormProps) {
         {fields.map((field, index) => (
           <div key={field.id} className="flex items-center space-x-2 mb-2">
             <input
-              type="text" id="ContactClient"
+              type="text" id="Client"
               placeholder="Nombre del Cliente"
               {...register(`Client.${index}.name`, { required: true })}
               className={`flex-1 bg-blue-50 border ${

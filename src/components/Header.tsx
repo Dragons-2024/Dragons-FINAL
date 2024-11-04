@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 export function Header() {
     return (
@@ -9,7 +10,7 @@ export function Header() {
                     <a href="#configuracion" className=" focus:bg-primary active:bg-primary text-light p-2 rounded">Configuración</a>
                     <a href="#clientes" className=" focus:bg-primary active:bg-primary text-light p-2 rounded">Clientes</a>
                     <a href="#oportunidades" className=" focus:bg-primary active:bg-primary text-light p-2 rounded">Oportunidades</a>
-                    <a href="#seguimiento" className=" focus:bg-primary active:bg-primary text-light p-2 rounded">Seguimiento</a>
+                   <Link to={"/activities"} className=" focus:bg-primary active:bg-primary text-light p-2 rounded">Seguimiento</Link>
                     <a href="#dashboard" className=" focus:bg-primary active:bg-primary text-light p-2 rounded">Dashboard</a>
                 </nav>
             </div>
