@@ -38,8 +38,7 @@ export const ClientList: React.FC = () => {
 
   return (
     <div className="p-4 font-poppins">
-      <h1 className="text-center py-6 text-5xl text-[#1E2759]">Clientes</h1>
-      <div className="flex justify-between">
+      <div className="flex justify-between my-8 pl-4">
         <h2 className="text-2xl font-bold mb-4 text-[#1E2759]">Lista de Clientes</h2>
         <Link
           to="/crear-cliente"
