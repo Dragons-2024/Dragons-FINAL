@@ -38,11 +38,12 @@ export const ClientList: React.FC = () => {
 
   return (
     <div className="p-4 font-poppins">
+      <h1 className="text-center py-6 text-5xl text-[#1E2759]">Clientes</h1>
       <div className="flex justify-between">
-        <h1 className="text-2xl font-bold mb-4">Lista de Clientes</h1>
+        <h2 className="text-2xl font-bold mb-4 text-[#1E2759]">Lista de Clientes</h2>
         <Link
           to="/crear-cliente"
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-4 inline-block"
+          className="bg-[#4A5FD9] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4 inline-block"
         >
           Crear Cliente
         </Link>
