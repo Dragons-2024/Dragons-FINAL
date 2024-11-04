@@ -45,7 +45,7 @@ export function ActivityTable() {
             headerName: "Acciones", 
             width: 180, 
             headerAlign: 'center',
-            renderCell: (params) => {
+            renderCell: () => {
                 return (
                     <div className="flex gap-1 justify-center mt-2">
                         <button className="text-xs p-1 bg-green-100 rounded-md 
