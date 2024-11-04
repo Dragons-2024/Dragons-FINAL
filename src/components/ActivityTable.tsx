@@ -1,27 +1,35 @@
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useGetActivity } from "../hooks/useGetActivities";
-import { ActivityFormType } from "./ActivityForm";
+import { ErrorMessage } from "./ErrorMessage";
+import { Loading } from "./Loading";
+import { useEffect, useState } from "react";
 import { ActivityType } from "../hooks/useCreateActivity";
 
 export function ActivityTable() {
-    const { data: Activity, isLoading, isError } = useGetActivity();
-    console.log(Activity);
+    const { data: Activity, isLoading, error } = useGetActivity();
+    const [activities, setActivities] = useState<ActivityType[]>();
+
+    useEffect(() => {
+        if (Activity !== undefined) {
+            setActivities(Activity);
+        }
+    }, [Activity]);
 
     const columns: GridColDef[] = [
-        { field: "ContactType", headerName: "Tipo de contacto", width: 180 },
-        { field: "ContactDate", headerName: "Fecha de contacto", width: 150 },
+        { field: "ContactType", headerName: "Tipo de contacto", width: 180, headerAlign: 'center' },
+        { field: "ContactDate", headerName: "Fecha de contacto", width: 150, headerAlign: 'center' },
         { 
             field: "Client", 
             headerName: "Clientes Asociados", 
             width: 200,
+            headerAlign: 'center',
             renderCell: (params) => {
-                // Verifica si params.value es un array y no es undefined
                 const clients = Array.isArray(params.value) ? params.value : [];
                 return (
                     <div style={{ maxHeight: '50px', overflowY: 'auto' }}>
-                        <ul style={{ padding: 0, margin: 0 }}> 
+                        <ul style={{ padding: 0, margin: 0 }}>
                             {clients.map((client, index) => (
-                                <li key={index} className="mx-auto"> 
+                                <li key={index} className="mx-auto">
                                     {client.name}
                                 </li>
                             ))}
@@ -30,16 +38,20 @@ export function ActivityTable() {
                 );
             },
         },
-        { field: "ContactUser", headerName: "Ejecutivo Comercial", width: 150 },
-        { field: "Description", headerName: "Descripción", width: 300 },
-        {field:"Actions",headerName:"Acciones",width:180,
-            renderCell:(params)=>{
-                return(
+        { field: "ContactUser", headerName: "Ejecutivo Comercial", width: 150, headerAlign: 'center' },
+        { field: "Description", headerName: "Descripción", width: 300, headerAlign: 'center' },
+        { 
+            field: "Actions", 
+            headerName: "Acciones", 
+            width: 180, 
+            headerAlign: 'center',
+            renderCell: (params) => {
+                return (
                     <div className="flex gap-1 justify-center mt-2">
                         <button className="text-xs p-1 bg-green-100 rounded-md 
                         text-white hover:bg-green-300"><img src="../src/assets/edit.svg" alt="Editar" /></button>
                         <button className="text-xs p-1 bg-red-100 rounded-md
-                         text-white hover:bg-red-300"><img src="../src/assets/delete.svg" alt="Eliminar" /></button>
+                        text-white hover:bg-red-300"><img src="../src/assets/delete.svg" alt="Eliminar" /></button>
                     </div>
                 );
             }
@@ -47,36 +59,46 @@ export function ActivityTable() {
     ];
 
     if (isLoading) {
-        return <p>Está Cargando...</p>;
+        return (<Loading />);
     }
 
-    if (isError) {
-        return <p>Error</p>;
+    if (error) {
+        return (<ErrorMessage message={`No se ha podido cargar la información. Error ${error.message}`} />);
     }
 
-    if (Activity !== undefined) {
-        return (
-            <div className="w-11/12 mx-auto my-10 text-center">
-                <DataGrid 
-                    columns={columns} 
-                    rows={Activity} 
-                    sx={{
-                        border: 'none',
-                        '& .MuiDataGrid-cell': {
-                            bgcolor: 'background.default', // Cambiar el fondo de las celdas
-                            borderBottom: '1px solid rgba(224, 224, 224, 1)', // Personalizar borde de celdas
-                        },
-                        '& .MuiDataGrid-columnHeader': {
-                            bgcolor: '#4A5FD9', // Cambiar el fondo de las cabeceras
-                            color: 'white', // Cambiar el color del texto de las cabeceras
-                        },
-                        '& .MuiDataGrid-footerCell': {
-                            borderTop: 'none', // Eliminar el borde superior del pie de página
-                        },
-                    }} 
-                />
-            </div>
-        );
+    if (activities !== undefined) {
+        if (activities.length > 0) {
+            return (
+                <div className="w-11/12 mx-auto my-10 text-center" style={{ overflowX: 'auto' }}>
+                    <DataGrid 
+                        columns={columns} 
+                        rows={activities} 
+                        autoHeight
+                        sx={{
+                            border: 'none',
+                            '& .MuiDataGrid-cell': {
+                                bgcolor: 'background.default', 
+                                borderBottom: '1px solid rgba(224, 224, 224, 1)', 
+                                textAlign: 'center', // Centrar el contenido de las celdas
+                            },
+                            '& .MuiDataGrid-columnHeader': {
+                                bgcolor: '#4A5FD9', 
+                                color: 'white', 
+                                textAlign: 'center', // Centrar el contenido de los encabezados
+                                justifyContent: 'center', // Centrar los encabezados
+                            },
+                            '& .MuiDataGrid-footerCell': {
+                                borderTop: 'none', 
+                            },
+                        }} 
+                    />
+                </div>
+            );
+        } else {
+            return (
+                <p className="text-3xl text-slate-900 text-center my-10">No hay actividades creadas</p>
+            );
+        }
     }
 
     return null;
