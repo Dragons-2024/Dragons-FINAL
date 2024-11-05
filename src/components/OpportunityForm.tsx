@@ -1,16 +1,6 @@
 import { useForm } from "react-hook-form";
-// import { useCreateOpportunity } from "../hooks/useCreateOpportunity"; // Asegúrate de tener un hook para manejar la creación de oportunidades
-
-export type OpportunityFormType = {
-  nombre: string;
-  descripcion: string;
-  fechaCreacion: Date;
-  estado: string;
-  valorEstimado: number;
-  clientes: {
-    name: string;
-  }[];
-};
+import { useCreateOpportunity } from "../hooks/useCreateOpportunity"; // Asegúrate de tener un hook para manejar la creación de oportunidades
+import { Oportunidad } from "../core/interface/opportunity";
 
 interface OpportunityFormProps {
   setClose: () => void;
@@ -23,33 +13,33 @@ const StatusOptions = [
 ];
 
 export function OpportunityForm({ setClose }: OpportunityFormProps) {
-//   const { mutate: createOpportunity, isError } = useCreateOpportunity();
+  const { mutate: createOpportunity, isError } = useCreateOpportunity();
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<OpportunityFormType>();
+  } = useForm<Oportunidad>();
 
- 
 
-  const onSubmit = (data: OpportunityFormType) => {
+
+  const onSubmit = (data: Oportunidad) => {
     console.log("Opportunity Information: ", data);
-    // createOpportunity({
-    //   ...data,
-    //   id: Math.floor(Math.random() * 1000),
-    // });
+    createOpportunity({
+      ...data,
+      id: Math.floor(Math.random() * 1000),
+    });
     setClose();
     reset();
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6 p-6 bg-white rounded-lg shadow-md">
-      {/* {isError && (
+       {isError && (
         <p className="mx-auto p-2 text-red-500">
           Error al crear oportunidad
         </p>
-      )} */}
+      )} 
 
       <section className="flex flex-col gap-2">
         <label htmlFor="nombre" className="text-gray-700 font-semibold">
@@ -121,7 +111,7 @@ export function OpportunityForm({ setClose }: OpportunityFormProps) {
         {errors.valorEstimado && <p className="text-red-500 text-xs">Campo obligatorio</p>}
       </section>
 
-      
+
 
       <button type="submit" className="px-7 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-800 focus:outline-none">
         Guardar
