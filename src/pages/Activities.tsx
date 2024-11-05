@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {WindowDialogue} from "../components/WindowDialogue";
+import {WindowDialogue} from "../components/ActivityWindowDialogue";
 import { Main } from "../layout/Main";
 import { ActivityTable } from "../components/ActivityTable";
 
