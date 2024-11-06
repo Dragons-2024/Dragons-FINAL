@@ -1,9 +1,6 @@
+import { WindowDialogueProps } from "../core/interface/ActivityInterface";
 import { ActivityForm } from "./ActivityForm";
 
-interface WindowDialogueProps {
-  open: boolean;
-  setclose: () => void;
-}
 
 export function WindowDialogue({ open, setclose }: WindowDialogueProps) {
   return (

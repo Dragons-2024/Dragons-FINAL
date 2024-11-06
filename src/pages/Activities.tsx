@@ -3,12 +3,15 @@ import {WindowDialogue} from "../components/ActivityWindowDialogue";
 import { Main } from "../layout/Main";
 import { ActivityTable } from "../components/ActivityTable";
 
+
 export function Activities(){
     const [Window,setWindow]=useState(false);
+    
 
     function setclose(){
       setWindow(false);
     }
+
     return(
        <Main>
         <section className="font-poppins p-10">

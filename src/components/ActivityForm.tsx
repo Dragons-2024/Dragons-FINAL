@@ -1,20 +1,8 @@
 import { useForm, useFieldArray } from "react-hook-form";
 import {  useCreateActivity } from "../hooks/useCreateActivity";
+import { ActivityFormProps, ActivityFormType, TypeContactProps } from "../core/interface/ActivityInterface";
 
-export type ActivityFormType = {
-  ContactType:string;
-  ContactDate:Date;
-  Client: {
-    name: string;
-  }[];
-  ContactUser:string;
-  Description:string;
-};
 
-interface TypeContactProps {
-  id: number;
-  name: string;
-}
 
 const TypeContact: TypeContactProps[] = [
   { id: 1, name: "Llamada" },
@@ -22,9 +10,7 @@ const TypeContact: TypeContactProps[] = [
   { id: 3, name: "Reunion Presencial" },
 ];
 
-interface ActivityFormProps{
-setclose:()=>void;
-}
+
 
 export function ActivityForm({setclose}:ActivityFormProps) {
   const { mutate: CreateActivity,isError } = useCreateActivity();
