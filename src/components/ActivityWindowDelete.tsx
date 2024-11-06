@@ -5,10 +5,10 @@ import { useDeleteActivity } from "../hooks/useDeleteActivity";
 
 export function WindowDelete({ open, setclose,activity}: WindowDeleteProps) {
 
-   const {mutate:DeleteActivity}=useDeleteActivity();
+   const DeleteActivity=useDeleteActivity();
 
-   function accept(activity:ActivityType){
-    DeleteActivity(activity);
+   const accept=(activity:ActivityType)=>{
+    DeleteActivity.mutate(activity);
     setclose();
    }
 

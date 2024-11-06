@@ -20,10 +20,11 @@ export const getActivity = async ():Promise<ActivityType[]> => {
   return response.data;
 };
 
-export const deleteActivity = async (activity: ActivityType) => {
+export const deleteActivity = async (activity: ActivityType)=> {
+  console.log(activity.id);
   try{
-    const response=await axiosApi.delete(`/activities${activity.id}`);
-    return response;
+    const response=await axiosApi.delete(`/activities/${activity.id}`);
+    return response.data;
   } catch (error) {
     console.log(error);
     throw new Error("Error al eliminar la actividad");

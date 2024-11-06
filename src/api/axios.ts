@@ -1,6 +1,6 @@
 import axios from 'axios';
 
 export const axiosApi = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://dragons-final-api.onrender.com',
   timeout: 5000,
 });
