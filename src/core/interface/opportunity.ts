@@ -1,9 +1,11 @@
 export interface Oportunidad {
-    id?: number;
-    nombre: string;
-    descripcion: string;
-    fechaCreacion: string;
-    estado: string;
-    valorEstimado: number;
-  }
+  id?: number;                      
+  cliente: string;                   
+  nombreNegocio: string;             
+  lineaNegocio: string;              
+  descripcionOportunidad: string;    
+  valorEstimado: number;             
+  fechaEstimadaRealizacion: string;  
+  estadoOportunidad: string;        
+}
   
