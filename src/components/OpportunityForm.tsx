@@ -1,15 +1,22 @@
 import { useForm } from "react-hook-form";
-import { useCreateOpportunity } from "../hooks/useCreateOpportunity"; // Asegúrate de tener un hook para manejar la creación de oportunidades
+import { useCreateOpportunity } from "../hooks/useCreateOpportunity";
 import { Oportunidad } from "../core/interface/opportunity";
 
 interface OpportunityFormProps {
   setClose: () => void;
 }
 
-const StatusOptions = [
-  { id: 1, name: "Pendiente" },
-  { id: 2, name: "En Progreso" },
-  { id: 3, name: "Completado" },
+const BusinessLineOptions = [
+  { id: 1, name: "Outsourcing Recursos" },
+  { id: 2, name: "Desarrollo Web" },
+  { id: 3, name: "Desarrollo Mobile" },
+  { id: 4, name: "Consultoría TI" },
+];
+
+const ClientOptions = [
+  { id: 1, name: "Cliente A" },
+  { id: 2, name: "Cliente B" },
+  { id: 3, name: "Cliente C" },
 ];
 
 export function OpportunityForm({ setClose }: OpportunityFormProps) {
@@ -21,81 +28,86 @@ export function OpportunityForm({ setClose }: OpportunityFormProps) {
     formState: { errors },
   } = useForm<Oportunidad>();
 
-
-
   const onSubmit = (data: Oportunidad) => {
-    console.log("Opportunity Information: ", data);
-    createOpportunity({
+    const newOpportunity = {
       ...data,
       id: Math.floor(Math.random() * 1000),
-    });
+      estadoOportunidad: "Apertura", // Asigna automáticamente "Apertura" al estado de la oportunidad
+    };
+    
+    createOpportunity(newOpportunity);
     setClose();
     reset();
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6 p-6 bg-white rounded-lg shadow-md">
-       {isError && (
+      {isError && (
         <p className="mx-auto p-2 text-red-500">
           Error al crear oportunidad
         </p>
-      )} 
+      )}
 
       <section className="flex flex-col gap-2">
-        <label htmlFor="nombre" className="text-gray-700 font-semibold">
-          Nombre de la Oportunidad:
-        </label>
-        <input
-          type="text"
-          id="nombre"
-          {...register("nombre", { required: true })}
-          className="bg-blue-100 border border-gray-300 rounded-md p-2 focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
-        />
-        {errors.nombre && <p className="text-red-500 text-xs">Campo obligatorio</p>}
-      </section>
-
-      <section className="flex flex-col gap-2">
-        <label htmlFor="descripcion" className="text-gray-700 font-semibold">
-          Descripción:
-        </label>
-        <textarea
-          id="descripcion"
-          {...register("descripcion", { required: true })}
-          className="bg-blue-100 border border-gray-300 rounded-md p-2 focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
-          placeholder="Describe la oportunidad"
-        ></textarea>
-        {errors.descripcion && <p className="text-red-500 text-xs">Campo obligatorio</p>}
-      </section>
-
-      <section className="flex flex-col gap-2">
-        <label htmlFor="fechaCreacion" className="text-gray-700 font-semibold">
-          Fecha de Creación:
-        </label>
-        <input
-          type="date"
-          id="fechaCreacion"
-          {...register("fechaCreacion", { required: true })}
-          className="bg-blue-100 border border-gray-300 rounded-md p-2 focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
-        />
-        {errors.fechaCreacion && <p className="text-red-500 text-xs">Campo obligatorio</p>}
-      </section>
-
-      <section className="flex flex-col gap-2">
-        <label htmlFor="estado" className="text-gray-700 font-semibold">
-          Estado:
+        <label htmlFor="cliente" className="text-gray-700 font-semibold">
+          Cliente:
         </label>
         <select
-          id="estado"
-          {...register("estado", { required: true })}
+          id="cliente"
+          {...register("cliente", { required: true })}
           className="bg-blue-100 border border-gray-300 rounded-md p-2 focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
         >
-          {StatusOptions.map((option) => (
-            <option key={option.id} value={option.name}>
-              {option.name}
+          {ClientOptions.map((client) => (
+            <option key={client.id} value={client.name}>
+              {client.name}
             </option>
           ))}
         </select>
-        {errors.estado && <p className="text-red-500 text-xs">Campo obligatorio</p>}
+        {errors.cliente && <p className="text-red-500 text-xs">Campo obligatorio</p>}
+      </section>
+
+      <section className="flex flex-col gap-2">
+        <label htmlFor="nombreNegocio" className="text-gray-700 font-semibold">
+          Nombre del Negocio:
+        </label>
+        <input
+          type="text"
+          id="nombreNegocio"
+          {...register("nombreNegocio", { required: true })}
+          className="bg-blue-100 border border-gray-300 rounded-md p-2 focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
+        />
+        {errors.nombreNegocio && <p className="text-red-500 text-xs">Campo obligatorio</p>}
+      </section>
+
+      <section className="flex flex-col gap-2">
+        <label htmlFor="lineaNegocio" className="text-gray-700 font-semibold">
+          Línea de Negocio:
+        </label>
+        <select
+          id="lineaNegocio"
+          {...register("lineaNegocio", { required: true })}
+          className="bg-blue-100 border border-gray-300 rounded-md p-2 focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
+        >
+          {BusinessLineOptions.map((line) => (
+            <option key={line.id} value={line.name}>
+              {line.name}
+            </option>
+          ))}
+        </select>
+        {errors.lineaNegocio && <p className="text-red-500 text-xs">Campo obligatorio</p>}
+      </section>
+
+      <section className="flex flex-col gap-2">
+        <label htmlFor="descripcionOportunidad" className="text-gray-700 font-semibold">
+          Descripción Oportunidad:
+        </label>
+        <textarea
+          id="descripcionOportunidad"
+          {...register("descripcionOportunidad", { required: true })}
+          className="bg-blue-100 border border-gray-300 rounded-md p-2 focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
+          placeholder="Describe la oportunidad"
+        ></textarea>
+        {errors.descripcionOportunidad && <p className="text-red-500 text-xs">Campo obligatorio</p>}
       </section>
 
       <section className="flex flex-col gap-2">
@@ -111,7 +123,18 @@ export function OpportunityForm({ setClose }: OpportunityFormProps) {
         {errors.valorEstimado && <p className="text-red-500 text-xs">Campo obligatorio</p>}
       </section>
 
-
+      <section className="flex flex-col gap-2">
+        <label htmlFor="fechaEstimadaRealizacion" className="text-gray-700 font-semibold">
+          Fecha Estimada de Realización:
+        </label>
+        <input
+          type="date"
+          id="fechaEstimadaRealizacion"
+          {...register("fechaEstimadaRealizacion", { required: true })}
+          className="bg-blue-100 border border-gray-300 rounded-md p-2 focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
+        />
+        {errors.fechaEstimadaRealizacion && <p className="text-red-500 text-xs">Campo obligatorio</p>}
+      </section>
 
       <button type="submit" className="px-7 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-800 focus:outline-none">
         Guardar
