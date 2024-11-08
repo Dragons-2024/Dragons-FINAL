@@ -1,4 +1,3 @@
-// src/components/ClientList.tsx
 import { useState } from "react";
 import { Cliente } from "../core/interface/client";
 import { Link } from "react-router-dom";

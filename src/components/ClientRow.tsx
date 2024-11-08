@@ -1,14 +1,7 @@
-// src/components/ClientRow.tsx
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faToggleOn, faToggleOff } from "@fortawesome/free-solid-svg-icons";
-import { Cliente } from "../core/interface/client";
-
-interface ClientRowProps {
-  cliente: Cliente;
-  onToggleActive: (clienteNit: string) => void;
-  onUpdate: (clienteNit: string) => void;
-}
+import { ClientRowProps } from "../core/clientRowProps";
 
 export const ClientRow: React.FC<ClientRowProps> = ({ cliente, onToggleActive, onUpdate }) => {
   return (
