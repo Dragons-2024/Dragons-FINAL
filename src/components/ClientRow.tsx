@@ -30,7 +30,7 @@ export const ClientRow: React.FC<ClientRowProps> = ({ cliente, onToggleActive, o
           Actualizar
         </button>
         <button
-          onClick={() => onToggleActive(cliente.nit)}
+          onClick={() => onToggleActive(cliente.nit, cliente.activo)}
           className={`font-bold py-1 px-2 rounded inline-flex items-center ${cliente.activo ? "bg-red-500 hover:bg-red-600" : "bg-green-500 hover:bg-green-600"} text-white`}
         >
           <FontAwesomeIcon icon={cliente.activo ? faToggleOff : faToggleOn} className="mr-1" />

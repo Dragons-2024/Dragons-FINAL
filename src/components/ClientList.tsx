@@ -1,46 +1,38 @@
-import { useState } from "react";
-import { Cliente } from "../core/interface/client";
 import { Link } from "react-router-dom";
 import { ClientRow } from "../components/ClientRow";
+import { useGetClientes } from "../hooks/useGetCliente";  
+import { useUpdateClienteStatus } from "../hooks/useUpdateCliente";
+import { Loading } from "../components/Loading"; 
+import { ErrorMessage } from "../components/ErrorMessage"; 
+import { Cliente } from "../core/interface/client"; 
 
 export const ClientList: React.FC = () => {
-  const [clientes, setClientes] = useState<Cliente[]>([
-    {
-      nit: "123456789",
-      nombre: "Empresa XYZ S.A.",
-      direccion: "Calle Falsa 123",
-      ciudad: "Ciudad Falsa",
-      pais: "Falsolandia",
-      telefono: "123-456-7890",
-      correoCorporativo: "contacto@empresaxyz.com",
-      activo: true,
-    },
-    {
-      nit: "987654321",
-      nombre: "Compañía ABC Ltda.",
-      direccion: "Avenida Siempre Viva 742",
-      ciudad: "Springfield",
-      pais: "EE.UU.",
-      telefono: "098-765-4321",
-      correoCorporativo: "info@companiaabc.com",
-      activo: false,
-    },
-  ]);
+  const { data: clientes, isLoading, error } = useGetClientes();
+  const { mutate: updateStatus } = useUpdateClienteStatus();
+
+  const handleToggleActive = (clienteNit: string, clienteActivo: boolean) => {
+    updateStatus({ nit: clienteNit, activo: !clienteActivo });
+  };
 
   const handleUpdate = (clienteNit: string) => {
     console.log(`Actualizar cliente con NIT: ${clienteNit}`);
-    // Implementa la lógica para actualizar el cliente aquí
   };
 
-  const handleToggleActive = (clienteNit: string) => {
-    setClientes((prevClientes) =>
-      prevClientes.map((cliente) =>
-        cliente.nit === clienteNit
-          ? { ...cliente, activo: !cliente.activo }
-          : cliente
-      )
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <ErrorMessage message={`No se ha podido cargar la información. Error: ${error.message}`} />;
+  }
+
+  if (!clientes || clientes.length === 0) {
+    return (
+      <div className="p-4 font-poppins">
+        <h2 className="text-2xl font-bold mb-4 text-[#1E2759]">No hay clientes registrados</h2>
+      </div>
     );
-  };
+  }
 
   return (
     <div className="p-4 font-poppins">
@@ -69,7 +61,7 @@ export const ClientList: React.FC = () => {
             </tr>
           </thead>
           <tbody className="text-gray-700 text-sm font-light">
-            {clientes.map((cliente) => (
+            {clientes.map((cliente: Cliente) => (
               <ClientRow
                 key={cliente.nit}
                 cliente={cliente}
