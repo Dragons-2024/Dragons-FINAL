@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Cliente } from "../core/interface/client";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faToggleOn, faToggleOff } from '@fortawesome/free-solid-svg-icons';
 
@@ -28,12 +28,18 @@ export const ClientList: React.FC = () => {
     },
   ]);
 
+  const navigate = useNavigate();
+
   const handleUpdate = (clienteNit: string) => {
     console.log(`Actualizar cliente con NIT: ${clienteNit}`);
   };
 
   const handleToggleActive = (clienteNit: string) => {
     console.log(`Inactivar/activar cliente con NIT: ${clienteNit}`);
+  };
+
+  const handleCustomerClick = (clienteNit: string) => {
+    navigate(`/customer/${clienteNit}`);
   };
 
   return (
@@ -71,7 +77,9 @@ export const ClientList: React.FC = () => {
                 <td className="py-3 px-6 text-left whitespace-nowrap">
                   {cliente.nit}
                 </td>
-                <td className="py-3 px-6 text-left">{cliente.nombre}</td>
+                <td className="py-3 px-6 text-left cursor-pointer" onClick={() => handleCustomerClick(cliente.nit)}>
+                  {cliente.nombre}
+                </td>
                 <td className="py-3 px-6 text-left">{cliente.direccion}</td>
                 <td className="py-3 px-6 text-left">{cliente.ciudad}</td>
                 <td className="py-3 px-6 text-left">{cliente.pais}</td>
