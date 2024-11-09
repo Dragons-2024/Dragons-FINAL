@@ -12,6 +12,8 @@ export const ClientList: React.FC = () => {
 
   const handleToggleActive = (clienteNit: string, clienteActivo: boolean) => {
     updateStatus({ nit: clienteNit, activo: !clienteActivo });
+    window.location.reload();
+
   };
 
   const handleUpdate = (clienteNit: string) => {
