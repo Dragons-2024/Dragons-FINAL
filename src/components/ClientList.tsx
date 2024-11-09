@@ -5,15 +5,30 @@ import { useUpdateClienteStatus } from "../hooks/useUpdateCliente";
 import { Loading } from "../components/Loading"; 
 import { ErrorMessage } from "../components/ErrorMessage"; 
 import { Cliente } from "../core/interface/client"; 
+import { useState, useEffect } from "react";
 
 export const ClientList: React.FC = () => {
-  const { data: clientes, isLoading, error } = useGetClientes();
+  const { data: clientesData, isLoading, error } = useGetClientes();
   const { mutate: updateStatus } = useUpdateClienteStatus();
+  
+  const [clientes, setClientes] = useState<Cliente[]>([]);
+
+  useEffect(() => {
+    if (clientesData) {
+      setClientes(clientesData);
+    }
+  }, [clientesData]);
 
   const handleToggleActive = (clienteNit: string, clienteActivo: boolean) => {
-    updateStatus({ nit: clienteNit, activo: !clienteActivo });
-    window.location.reload();
-
+    updateStatus({ nit: clienteNit, activo: !clienteActivo }, {
+      onSuccess: () => {
+        setClientes(prevClientes =>
+          prevClientes.map(cliente =>
+            cliente.nit === clienteNit ? { ...cliente, activo: !clienteActivo } : cliente
+          )
+        );
+      }
+    });
   };
 
   const handleUpdate = (clienteNit: string) => {
