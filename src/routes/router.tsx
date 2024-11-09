@@ -4,6 +4,7 @@ import { Cliente } from "../pages/Client";
 import { NewClient } from "../pages/NewClient";
 import { Opportunity } from "../pages/Opportunity";
 import { Activities } from "../pages/Activities";
+import { DetailClient } from "../pages/DetailClient";
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -20,6 +21,12 @@ export const router = createBrowserRouter([
         element: <NewClient />,
         errorElement: <div>404 Not Found</div>
     },
+    {
+        path: "/detalle-cliente",
+        element: <DetailClient/>,
+        errorElement: <div>404 Not Found</div>
+    }
+    ,
     {
         path:"/seguimiento",
         element:<Activities/>,
