@@ -12,8 +12,10 @@ export const getClientes = async () => {
 export const updateClienteActivo = async (nit: string, activo: boolean) => {
   try {
     const response = await axiosApi.put(`/clientes/${nit}`, { activo });
-    return response.data; // Devuelve la respuesta del servidor si es necesario
+    return response.data; 
   } catch (error) {
+    console.error("Error al actualizar el estado del cliente:", error);
+    console.log(nit);
     throw new Error('Error al actualizar el estado del cliente');
   }
 };

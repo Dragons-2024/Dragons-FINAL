@@ -1,4 +1,3 @@
-// ClientRowProps.ts
 import { Cliente } from "../core/interface/client";
 
 export interface ClientRowProps {
