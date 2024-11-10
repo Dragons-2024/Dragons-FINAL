@@ -4,7 +4,7 @@ import { Main } from "../layout/Main";
 
 
     
-export function DetailClient(){
+export function ClientDetail(){
     const cliente:Cliente = 
         {
             id: 1,
