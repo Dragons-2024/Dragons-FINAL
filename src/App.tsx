@@ -1,7 +1,5 @@
-// src/App.tsx
-import React from "react";
 import { DetailClientTable } from "./components/DetailClientTable";
-import { Client } from "./core/interface/client"; // Asegúrate de importar 'Client'
+import { Client } from "./core/interface/client";
 
 const cliente: Client = {
   id: 1,

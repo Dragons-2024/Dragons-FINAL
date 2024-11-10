@@ -4,14 +4,14 @@ import { useGetClientes } from "../hooks/useGetCliente";
 import { useUpdateClienteStatus } from "../hooks/useUpdateCliente";
 import { Loading } from "../components/Loading"; 
 import { ErrorMessage } from "../components/ErrorMessage"; 
-import { Cliente } from "../core/interface/client"; 
+import { Client } from "../core/interface/client"; 
 import { useState, useEffect } from "react";
 
 export const ClientList: React.FC = () => {
   const { data: clientesData, isLoading, error } = useGetClientes();
   const { mutate: updateStatus } = useUpdateClienteStatus();
   
-  const [clientes, setClientes] = useState<Cliente[]>([]);
+  const [clientes, setClientes] = useState<Client[]>([]);
 
   useEffect(() => {
     if (clientesData) {
@@ -78,7 +78,7 @@ export const ClientList: React.FC = () => {
             </tr>
           </thead>
           <tbody className="text-gray-700 text-sm font-light">
-            {clientes.map((cliente: Cliente) => (
+            {clientes.map((cliente: Client) => (
               <ClientRow
                 key={cliente.nit}
                 cliente={cliente}

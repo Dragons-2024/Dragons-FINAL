@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Cliente } from '../core/interface/client';
+import { Client } from '../core/interface/client';
 
 export const FormClient: React.FC = () => {
-  const [cliente, setCliente] = useState<Cliente>({
+  const [cliente, setCliente] = useState<Client>({
+    id: 0, 
     nit: '',
     nombre: '',
     direccion: '',
@@ -10,9 +11,12 @@ export const FormClient: React.FC = () => {
     pais: '',
     telefono: '',
     correoCorporativo: '',
+    correoElectronico: '',
+    fechaRegistro: '', 
+    estado: '',
     activo: true,
   });
-
+  
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -45,6 +49,7 @@ export const FormClient: React.FC = () => {
     setErrorMessage(null);
 
     setCliente({
+      id: 0, 
       nit: '',
       nombre: '',
       direccion: '',
@@ -52,6 +57,9 @@ export const FormClient: React.FC = () => {
       pais: '',
       telefono: '',
       correoCorporativo: '',
+      correoElectronico: '',
+      fechaRegistro: '', 
+      estado: '',
       activo: true,
     });
 

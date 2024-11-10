@@ -1,51 +1,71 @@
 import { Client } from "../core/interface/client";
-import { Link } from "react-router-dom";
 
 export function DetailClientTable({ cliente }: { cliente: Client }) {
-  const HeaderClient: string[] = [
-    "NIT",
-    "Nombre",
-    "Dirección",
-    "Ciudad",
-    "País",
-    "Teléfono",
-    "Correo",
-    "Activo",
-  ];
-
   return (
-    <table className="mb-5 min-w-full bg-white border border-gray-200">
-      <thead>
-        <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-          {HeaderClient.map((theader) => (
-            <th key={theader} className="py-3 px-6 text-center">
-              {theader}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        <tr className="border-b border-gray-200 hover:bg-gray-100">
-          <td className="py-3 px-6 text-center">{cliente.nit}</td>
-          <td className="py-3 px-6 text-left">
-            <Link className="hover:text-blue-500" to={"detalles-clientes"} state={cliente}>
-              {cliente.nombre}
-            </Link>
-          </td>
-          <td className="py-3 px-6 text-center">{cliente.direccion}</td>
-          <td className="py-3 px-6 text-center">{cliente.ciudad}</td>
-          <td className="py-3 px-6 text-center">{cliente.pais}</td>
-          <td className="py-3 px-6 text-center">{cliente.telefono}</td>
-          <td className="py-3 px-6 text-center">{cliente.correoCorporativo}</td>
-          <td className="py-3 px-6 text-center">
-            {cliente.activo ? (
-              <span className="text-green-500 font-bold">Sí</span>
-            ) : (
-              <span className="text-red-500 font-bold">No</span>
-            )}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div className="p-4 font-poppins">
+      <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+          Detalles del Cliente
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <p className="text-gray-600 font-semibold">Nombre</p>
+            <p className="text-gray-800">{cliente.nombre}</p>
+          </div>
+
+          <div>
+            <p className="text-gray-600 font-semibold">NIT</p>
+            <p className="text-gray-800">{cliente.nit}</p>
+          </div>
+
+          <div>
+            <p className="text-gray-600 font-semibold">Correo Electrónico</p>
+            <p className="text-gray-800">{cliente.correoElectronico}</p>
+          </div>
+
+          <div>
+            <p className="text-gray-600 font-semibold">Correo Corporativo</p>
+            <p className="text-gray-800">{cliente.correoCorporativo}</p>
+          </div>
+
+          <div>
+            <p className="text-gray-600 font-semibold">Teléfono</p>
+            <p className="text-gray-800">{cliente.telefono}</p>
+          </div>
+
+          <div>
+            <p className="text-gray-600 font-semibold">Dirección</p>
+            <p className="text-gray-800">{cliente.direccion}</p>
+          </div>
+
+          <div>
+            <p className="text-gray-600 font-semibold">Ciudad</p>
+            <p className="text-gray-800">{cliente.ciudad}</p>
+          </div>
+
+          <div>
+            <p className="text-gray-600 font-semibold">País</p>
+            <p className="text-gray-800">{cliente.pais}</p>
+          </div>
+
+          <div>
+            <p className="text-gray-600 font-semibold">Fecha de Registro</p>
+            <p className="text-gray-800">{cliente.fechaRegistro}</p>
+          </div>
+
+          <div>
+            <p className="text-gray-600 font-semibold">Estado</p>
+            <p
+              className={`font-semibold ${
+                cliente.activo ? "text-green-600" : "text-red-600"
+              }`}
+            >
+              {cliente.activo ? "Activo" : "Inactivo"}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

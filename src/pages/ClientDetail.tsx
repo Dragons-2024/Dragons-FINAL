@@ -3,6 +3,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { Client } from "../core/interface/client"; // Asegúrate de importar 'Client'
 import { DetailClientTable } from "../components/DetailClientTable";
+import { Main } from "../layout/Main";
 
 const ClientDetail: React.FC = () => {
   const location = useLocation();
@@ -13,10 +14,12 @@ const ClientDetail: React.FC = () => {
   }
 
   return (
+    <Main>
+
     <div className="container mx-auto mt-5">
-      <h1 className="text-2xl font-bold mb-5">Detalles del Cliente</h1>
       <DetailClientTable cliente={cliente} />
     </div>
+    </Main>
   );
 };
 
