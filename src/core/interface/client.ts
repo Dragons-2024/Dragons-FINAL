@@ -1,12 +1,15 @@
-export interface Cliente {
-    id?: number;
-    nit: string;
-    nombre: string;
-    direccion: string;
-    ciudad: string;
-    pais: string;
-    telefono: string;
-    correoCorporativo: string;
-    activo: boolean;
-  }
-  
+// src/core/interface/client.ts
+export interface Client {
+  id: number;
+  nombre: string;
+  correoElectronico: string;
+  telefono: string;
+  direccion: string;
+  fechaRegistro: string;
+  estado: string;
+  nit: string;
+  ciudad: string;
+  pais: string;
+  correoCorporativo: string;
+  activo: boolean;
+}

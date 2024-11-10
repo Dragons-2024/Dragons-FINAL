@@ -1,40 +1,55 @@
-import { useState } from "react";
-import { Cliente } from "../core/interface/client";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faToggleOn, faToggleOff } from '@fortawesome/free-solid-svg-icons';
+import { ClientRow } from "../components/ClientRow";
+import { useGetClientes } from "../hooks/useGetCliente";  
+import { useUpdateClienteStatus } from "../hooks/useUpdateCliente";
+import { Loading } from "../components/Loading"; 
+import { ErrorMessage } from "../components/ErrorMessage"; 
+import { Client } from "../core/interface/client"; 
+import { useState, useEffect } from "react";
 
 export const ClientList: React.FC = () => {
-  const [clientes] = useState<Cliente[]>([
-    {
-      nit: "123456789",
-      nombre: "Empresa XYZ S.A.",
-      direccion: "Calle Falsa 123",
-      ciudad: "Ciudad Falsa",
-      pais: "Falsolandia",
-      telefono: "123-456-7890",
-      correoCorporativo: "contacto@empresaxyz.com",
-      activo: true,
-    },
-    {
-      nit: "987654321",
-      nombre: "Compañía ABC Ltda.",
-      direccion: "Avenida Siempre Viva 742",
-      ciudad: "Springfield",
-      pais: "EE.UU.",
-      telefono: "098-765-4321",
-      correoCorporativo: "info@companiaabc.com",
-      activo: false,
-    },
-  ]);
+  const { data: clientesData, isLoading, error } = useGetClientes();
+  const { mutate: updateStatus } = useUpdateClienteStatus();
+  
+  const [clientes, setClientes] = useState<Client[]>([]);
+
+  useEffect(() => {
+    if (clientesData) {
+      setClientes(clientesData);
+    }
+  }, [clientesData]);
+
+  const handleToggleActive = (clienteNit: string, clienteActivo: boolean) => {
+    updateStatus({ nit: clienteNit, activo: !clienteActivo }, {
+      onSuccess: () => {
+        setClientes(prevClientes =>
+          prevClientes.map(cliente =>
+            cliente.nit === clienteNit ? { ...cliente, activo: !clienteActivo } : cliente
+          )
+        );
+      }
+    });
+  };
 
   const handleUpdate = (clienteNit: string) => {
     console.log(`Actualizar cliente con NIT: ${clienteNit}`);
   };
 
-  const handleToggleActive = (clienteNit: string) => {
-    console.log(`Inactivar/activar cliente con NIT: ${clienteNit}`);
-  };
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <ErrorMessage message={`No se ha podido cargar la información. Error: ${error.message}`} />;
+  }
+
+  if (!clientes || clientes.length === 0) {
+    return (
+      <div className="p-4 font-poppins">
+        <h2 className="text-2xl font-bold mb-4 text-[#1E2759]">No hay clientes registrados</h2>
+      </div>
+    );
+  }
 
   return (
     <div className="p-4 font-poppins">
@@ -63,47 +78,13 @@ export const ClientList: React.FC = () => {
             </tr>
           </thead>
           <tbody className="text-gray-700 text-sm font-light">
-            {clientes.map((cliente) => (
-              <tr
+            {clientes.map((cliente: Client) => (
+              <ClientRow
                 key={cliente.nit}
-                className="border-b border-gray-200 hover:bg-gray-100"
-              >
-                <td className="py-3 px-6 text-left whitespace-nowrap">
-                  {cliente.nit}
-                </td>
-                <td className="py-3 px-6 text-left">{cliente.nombre}</td>
-                <td className="py-3 px-6 text-left">{cliente.direccion}</td>
-                <td className="py-3 px-6 text-left">{cliente.ciudad}</td>
-                <td className="py-3 px-6 text-left">{cliente.pais}</td>
-                <td className="py-3 px-6 text-left">{cliente.telefono}</td>
-                <td className="py-3 px-6 text-left">
-                  {cliente.correoCorporativo}
-                </td>
-                <td className="py-3 px-6 text-center">
-                  {cliente.activo ? (
-                    <span className="text-green-500 font-bold">Sí</span>
-                  ) : (
-                    <span className="text-red-500 font-bold">No</span>
-                  )}
-                </td>
-                <td className="py-3 px-6 text-center flex justify-center space-x-2">
-                  <button
-                    onClick={() => handleUpdate(cliente.nit)}
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded inline-flex items-center"
-                  >
-                    <FontAwesomeIcon icon={faEdit} className="mr-1" />
-                    Actualizar
-                  </button>
-                  <button
-                    onClick={() => handleToggleActive(cliente.nit)}
-                    className={`font-bold py-1 px-2 rounded inline-flex items-center ${cliente.activo ? "bg-red-500 hover:bg-red-600" : "bg-green-500 hover:bg-green-600"
-                      } text-white`}
-                  >
-                    <FontAwesomeIcon icon={cliente.activo ? faToggleOff : faToggleOn} className="mr-1" />
-                    {cliente.activo ? "Inactivar" : "Activar"}
-                  </button>
-                </td>
-              </tr>
+                cliente={cliente}
+                onToggleActive={handleToggleActive}
+                onUpdate={handleUpdate}
+              />
             ))}
           </tbody>
         </table>

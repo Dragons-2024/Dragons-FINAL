@@ -4,7 +4,8 @@ import { Cliente } from "../pages/Client";
 import { NewClient } from "../pages/NewClient";
 import { Opportunity } from "../pages/Opportunity";
 import { Activities } from "../pages/Activities";
-import { ClientDetail } from "../pages/ClientDetail";
+import ClientDetail from "../pages/ClientDetail"; // Importa el componente de detalles del cliente
+
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -35,6 +36,11 @@ export const router = createBrowserRouter([
     {
         path: "/oportunidades",
         element: <Opportunity />,
+        errorElement: <div>404 Not Found</div>
+    },
+    {
+        path: "/detalles-clientes/:nit",
+        element: <ClientDetail />,
         errorElement: <div>404 Not Found</div>
     }
 ]);

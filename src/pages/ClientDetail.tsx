@@ -1,28 +1,26 @@
-import { ClientOportunityList } from "../components/ClientOportunityList";
-import { Cliente } from "../core/interface/client";
+// src/pages/ClientDetail.tsx
+import React from "react";
+import { useLocation } from "react-router-dom";
+import { Client } from "../core/interface/client"; // Asegúrate de importar 'Client'
+import { DetailClientTable } from "../components/DetailClientTable";
 import { Main } from "../layout/Main";
 
+const ClientDetail: React.FC = () => {
+  const location = useLocation();
+  const cliente = location.state as Client;
 
-    
-export function ClientDetail(){
-    const cliente:Cliente = 
-        {
-            id: 1,
-            nit: "123456789",
-            nombre: "Empresa XYZ S.A.",
-            direccion: "Calle Falsa 123",
-            ciudad: "Ciudad Falsa",
-            pais: "Falsolandia",
-            telefono: "123-456-7890",
-            correoCorporativo: "contacto@empresaxyz.com",
-            activo: true
-          }
-    
-    const name=cliente.nombre;
+  if (!cliente) {
+    return <div>No se encontraron detalles del cliente.</div>;
+  }
 
-    return(
-      <Main>
-        <ClientOportunityList ClientName={name}/>
-      </Main>
-    );
-}
+  return (
+    <Main>
+
+    <div className="container mx-auto mt-5">
+      <DetailClientTable cliente={cliente} />
+    </div>
+    </Main>
+  );
+};
+
+export default ClientDetail;
