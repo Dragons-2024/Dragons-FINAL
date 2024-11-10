@@ -71,7 +71,7 @@ export function ClientDetailActivities(oportunity: Oportunidad) {
                     </table>
                 </div>
             ) : (
-                <p className="text-3xl text-slate-900 text-center my-10">No hay seguimientos creados</p>
+                <p className="text-3xl text-slate-900 text-center my-10">No hay tiene actividades de seguimientos</p>
             )}
         </section>
     );
