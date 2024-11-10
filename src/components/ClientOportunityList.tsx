@@ -37,8 +37,8 @@ export function ClientOportunityList({ ClientName }: ClientOportunityListProps) 
     }
 
     return (
-        <section className="p-5 overflow-x-auto">
-            <table className="mb-5 min-w-full bg-white border border-gray-200 relative">
+        <section className="p-4 overflow-x-auto mx-auto">
+            <table className="mb-5 min-w-full bg-white border border-gray-200 relative mx-auto">
                 <thead>
                     <tr className="bg-gray-200 text-gray-600 uppercase text-xs md:text-sm leading-normal">
                         {HeaderOportunity.map((theader) => (
