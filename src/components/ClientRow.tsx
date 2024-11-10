@@ -2,12 +2,17 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faToggleOn, faToggleOff } from "@fortawesome/free-solid-svg-icons";
 import { ClientRowProps } from "../core/clientRowProps";
+import { Link } from "react-router-dom";
 
 export const ClientRow: React.FC<ClientRowProps> = ({ cliente, onToggleActive, onUpdate }) => {
   return (
     <tr className={`border-b border-gray-200 hover:bg-gray-100 ${!cliente.activo ? "text-red-500" : "text-black"}`}>
       <td className="py-3 px-6 text-left">{cliente.nit}</td>
-      <td className="py-3 px-6 text-left">{cliente.nombre}</td>
+      <td className="py-3 px-6 text-left">
+        <Link className="hover:text-blue-500" to={`/detalles-clientes/${cliente.nit}`} state={cliente}>
+          {cliente.nombre}
+        </Link>
+      </td>
       <td className="py-3 px-6 text-left">{cliente.direccion}</td>
       <td className="py-3 px-6 text-left">{cliente.ciudad}</td>
       <td className="py-3 px-6 text-left">{cliente.pais}</td>
