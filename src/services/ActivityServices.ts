@@ -1,5 +1,5 @@
 import { axiosApi } from "../api/axios";
-import { ActivityType } from "../hooks/useCreateActivity";
+import { ActivityType } from "../core/interface/Activities";
 // import { fetcher } from "../api/api";
 
 export const addActivity = async (activity: ActivityType) => {

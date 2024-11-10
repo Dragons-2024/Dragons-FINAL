@@ -1,16 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addActivity } from "../services/ActivityServices";
+import { ActivityType } from "../core/interface/Activities";
 
-export type ActivityType = {
-    id:number;
-    ContactType:string;
-    ContactDate:Date;
-    Client: {
-      name: string;
-    }[];
-    ContactUser:string;
-    Description:string;
-  };
+
 
 export const useCreateActivity = () => {
   const queryClient = useQueryClient();
@@ -24,3 +16,8 @@ export const useCreateActivity = () => {
     }
   });
 };
+
+
+
+
+

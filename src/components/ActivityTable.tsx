@@ -3,7 +3,7 @@ import { useGetActivity } from "../hooks/useGetActivities";
 import { ErrorMessage } from "./ErrorMessage";
 import { Loading } from "./Loading";
 import { useEffect, useState } from "react";
-import { ActivityType } from "../hooks/useCreateActivity";
+import { ActivityType } from "../core/interface/Activities";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 

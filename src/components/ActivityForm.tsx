@@ -1,32 +1,23 @@
 import { useForm, useFieldArray } from "react-hook-form";
 import {  useCreateActivity } from "../hooks/useCreateActivity";
+import { ActivityFormType, HeaderProps } from "../core/interface/Activities";
 
-export type ActivityFormType = {
-  ContactType:string;
-  ContactDate:Date;
-  Client: {
-    name: string;
-  }[];
-  ContactUser:string;
-  Description:string;
-};
 
-interface TypeContactProps {
-  id: number;
-  name: string;
-}
 
-const TypeContact: TypeContactProps[] = [
+
+
+const TypeContact: HeaderProps[] = [
   { id: 1, name: "Llamada" },
   { id: 2, name: "Correo" },
   { id: 3, name: "Reunion Presencial" },
 ];
 
 interface ActivityFormProps{
+BusinessName:string;
 setclose:()=>void;
 }
 
-export function ActivityForm({setclose}:ActivityFormProps) {
+export function ActivityForm({BusinessName,setclose}:ActivityFormProps) {
   const { mutate: CreateActivity,isError } = useCreateActivity();
   const { register,handleSubmit,control,reset,   formState: { errors },
   } = useForm<ActivityFormType>();
@@ -41,6 +32,7 @@ export function ActivityForm({setclose}:ActivityFormProps) {
     CreateActivity({
       ...data,
       id: Math.floor(Math.random() * 1000),
+      BusinessName:BusinessName
     });
      setclose();
       reset();
