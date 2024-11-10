@@ -17,7 +17,7 @@ export function WindowDialogue({ open, setclose }: WindowDialogueProps) {
         </button>
 
         <h1 className="text-3xl text-center text-[#4A5FD9]">Crear Seguimiento</h1>
-        <ActivityForm setclose={setclose} />
+        <ActivityForm BusinessName={"Negocio A"} setclose={setclose} />
       </div>
     </div>
   );
