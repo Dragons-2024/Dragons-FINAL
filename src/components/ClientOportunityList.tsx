@@ -53,8 +53,9 @@ export function ClientOportunityList({ ClientName }: ClientOportunityListProps) 
     }
 
     return (
-        <section className="p-4 overflow-x-auto mx-auto">
-            <table className="mb-5 min-w-full bg-white border border-gray-200 relative mx-auto">
+        <>
+        <section className="p-4 overflow-x-auto mx-auto ">
+            {FilterOportunities.length>0?(<table className="mb-5 min-w-full bg-white border border-gray-200 relative mx-auto shadow-lg">
                 <thead>
                     <tr className="bg-gray-200 text-gray-600 uppercase text-xs md:text-sm leading-normal">
                         {HeaderOportunity.map((theader) => (
@@ -86,8 +87,13 @@ export function ClientOportunityList({ ClientName }: ClientOportunityListProps) 
                         </tr>
                     ))}
                 </tbody>
-            </table>
-            {OportunityActivities&&(<ClientDetailActivities {...OportunityActivities}/>)}
+            </table>):(
+                <p className="text-3xl text-slate-900 text-center my-10">No tiene oportunidades</p>
+            )}
+            
         </section>
+        {OportunityActivities&&(<ClientDetailActivities {...OportunityActivities}/>)}
+        </>
+    
     );
 }

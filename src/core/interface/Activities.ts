@@ -15,3 +15,13 @@ export type ActivityType = {
     Description:string;
     nombreNegocio:string;
   };
+
+  export type ActivityFormType = {
+    ContactType:string;
+    ContactDate:Date;
+    Client: {
+      name: string;
+    }[];
+    ContactUser:string;
+    Description:string;
+  };

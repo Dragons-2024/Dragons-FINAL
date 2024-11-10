@@ -26,12 +26,6 @@ export function Header() {
             Oportunidades
           </Link>
           <Link
-            to="/seguimiento"
-            className="focus:bg-primary active:bg-primary text-light p-2 rounded"
-          >
-            Seguimiento
-          </Link>
-          <Link
             to="/dashboard"
             className="focus:bg-primary active:bg-primary text-light p-2 rounded"
           >
