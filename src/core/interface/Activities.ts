@@ -13,7 +13,7 @@ export type ActivityType = {
     }[];
     ContactUser:string;
     Description:string;
-    nombreNegocio:string;
+    BusinessName:string;
   };
 
   export type ActivityFormType = {
