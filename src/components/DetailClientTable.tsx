@@ -20,11 +20,6 @@ export function DetailClientTable({ cliente }: { cliente: Client }) {
           </div>
 
           <div>
-            <p className="text-gray-600 font-semibold">Correo Electrónico</p>
-            <p className="text-gray-800">{cliente.correoElectronico}</p>
-          </div>
-
-          <div>
             <p className="text-gray-600 font-semibold">Correo Corporativo</p>
             <p className="text-gray-800">{cliente.correoCorporativo}</p>
           </div>
@@ -47,11 +42,6 @@ export function DetailClientTable({ cliente }: { cliente: Client }) {
           <div>
             <p className="text-gray-600 font-semibold">País</p>
             <p className="text-gray-800">{cliente.pais}</p>
-          </div>
-
-          <div>
-            <p className="text-gray-600 font-semibold">Fecha de Registro</p>
-            <p className="text-gray-800">{cliente.fechaRegistro}</p>
           </div>
 
           <div>
