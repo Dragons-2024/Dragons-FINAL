@@ -4,10 +4,10 @@ import { useGetClientes } from "../hooks/useGetCliente";
 import { Loading } from "../components/Loading";
 import { ErrorMessage } from "../components/ErrorMessage";
 import { Client } from "../core/interface/client";
-import { useQueryClient } from "@tanstack/react-query";
+
 
 export const ClientList: React.FC = () => {
-  const queryClient = useQueryClient();
+  
   const { data: clientesData, isLoading, error } = useGetClientes();
 
   if (isLoading) {
