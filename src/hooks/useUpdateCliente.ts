@@ -1,17 +1,17 @@
-import {patchClient} from '../services/ClienteServices';
-import {useMutation, useQueryClient} from '@tanstack/react-query';
-import {Client} from '../core/interface/client';
-
+import { patchClient } from "../services/ClienteServices";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Client } from "../core/interface/client";
 
 export const useUpdateCliente = () => {
   const queryClient = useQueryClient();
+
   return useMutation({
-    mutationFn: ({ id, cliente }: { id: number, cliente: Client }) => patchClient(id, cliente),
+    mutationFn: ({ id, cliente }: { id: number; cliente: Client }) => patchClient(id, cliente),
     onSuccess: () => {
-      queryClient.invalidateQueries({queryKey: ['clientes']});
+      queryClient.invalidateQueries({ queryKey: ["clientes"] }); // Invalida la caché de clientes
     },
     onError: (error) => {
-      console.error('Error al actualizar el cliente:', error);
-    }
+      console.error("Error al actualizar el cliente:", error);
+    },
   });
 };

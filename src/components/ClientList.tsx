@@ -1,26 +1,14 @@
 import { Link } from "react-router-dom";
 import { ClientRow } from "../components/ClientRow";
-import { useGetClientes } from "../hooks/useGetCliente";  
-import { Loading } from "../components/Loading"; 
-import { ErrorMessage } from "../components/ErrorMessage"; 
-import { Client } from "../core/interface/client"; 
-import { useState, useEffect } from "react";
+import { useGetClientes } from "../hooks/useGetCliente";
+import { Loading } from "../components/Loading";
+import { ErrorMessage } from "../components/ErrorMessage";
+import { Client } from "../core/interface/client";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const ClientList: React.FC = () => {
+  const queryClient = useQueryClient();
   const { data: clientesData, isLoading, error } = useGetClientes();
-
-  
-  const [clientes, setClientes] = useState<Client[]>([]);
-
-  useEffect(() => {
-    if (clientesData) {
-      setClientes(clientesData);
-    }
-  }, [clientesData]);
-
- 
-
-
 
   if (isLoading) {
     return <Loading />;
@@ -30,7 +18,7 @@ export const ClientList: React.FC = () => {
     return <ErrorMessage message={`No se ha podido cargar la información. Error: ${error.message}`} />;
   }
 
-  if (!clientes || clientes.length === 0) {
+  if (!clientesData || clientesData.length === 0) {
     return (
       <div className="p-4 font-poppins">
         <h2 className="text-2xl font-bold mb-4 text-[#1E2759]">No hay clientes registrados</h2>
@@ -65,13 +53,8 @@ export const ClientList: React.FC = () => {
             </tr>
           </thead>
           <tbody className="text-gray-700 text-sm font-light">
-            {clientes.map((cliente: Client) => (
-              <ClientRow
-                key={cliente.id}
-                cliente={cliente}
-                
-
-              />
+            {clientesData.map((cliente: Client) => (
+              <ClientRow key={cliente.id} cliente={cliente} />
             ))}
           </tbody>
         </table>
