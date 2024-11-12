@@ -31,8 +31,8 @@ export const ClientList: React.FC = () => {
     });
   };
 
-  const handleUpdate = (clienteNit: string) => {
-    console.log(`Actualizar cliente con NIT: ${clienteNit}`);
+  const handleUpdate = (updatedClient: Client) => {
+    console.log(`Actualizar cliente con NIT: ${updatedClient.nit}`);
   };
 
   if (isLoading) {
