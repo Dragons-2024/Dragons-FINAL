@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { ClientRow } from "../components/ClientRow";
 import { useGetClientes } from "../hooks/useGetCliente";  
-import { useUpdateClienteStatus } from "../hooks/useUpdateCliente";
 import { Loading } from "../components/Loading"; 
 import { ErrorMessage } from "../components/ErrorMessage"; 
 import { Client } from "../core/interface/client"; 
@@ -9,7 +8,7 @@ import { useState, useEffect } from "react";
 
 export const ClientList: React.FC = () => {
   const { data: clientesData, isLoading, error } = useGetClientes();
-  const { mutate: updateStatus } = useUpdateClienteStatus();
+
   
   const [clientes, setClientes] = useState<Client[]>([]);
 
@@ -19,21 +18,9 @@ export const ClientList: React.FC = () => {
     }
   }, [clientesData]);
 
-  const handleToggleActive = (clienteNit: string, clienteActivo: boolean) => {
-    updateStatus({ nit: clienteNit, activo: !clienteActivo }, {
-      onSuccess: () => {
-        setClientes(prevClientes =>
-          prevClientes.map(cliente =>
-            cliente.nit === clienteNit ? { ...cliente, activo: !clienteActivo } : cliente
-          )
-        );
-      }
-    });
-  };
+ 
 
-  const handleUpdate = (updatedClient: Client) => {
-    console.log(`Actualizar cliente con NIT: ${updatedClient.nit}`);
-  };
+
 
   if (isLoading) {
     return <Loading />;
@@ -80,10 +67,10 @@ export const ClientList: React.FC = () => {
           <tbody className="text-gray-700 text-sm font-light">
             {clientes.map((cliente: Client) => (
               <ClientRow
-                key={cliente.nit}
+                key={cliente.id}
                 cliente={cliente}
-                onToggleActive={handleToggleActive}
-                onUpdate={handleUpdate}
+                
+
               />
             ))}
           </tbody>

@@ -1,9 +1,17 @@
-import { useMutation } from "@tanstack/react-query";
-import { updateClienteActivo } from "../services/ClienteServices";
+import {patchClient} from '../services/ClienteServices';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
+import {Client} from '../core/interface/client';
 
-export const useUpdateClienteStatus = () => {
+
+export const useUpdateCliente = () => {
+  const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (params: { nit: string; activo: boolean }) => 
-      updateClienteActivo(params.nit, params.activo),
+    mutationFn: ({ id, cliente }: { id: number, cliente: Client }) => patchClient(id, cliente),
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ['clientes']});
+    },
+    onError: (error) => {
+      console.error('Error al actualizar el cliente:', error);
+    }
   });
 };

@@ -13,9 +13,6 @@ export const FormClient: React.FC = () => {
     pais: '',
     telefono: '',
     correoCorporativo: '',
-    correoElectronico: '',
-    fechaRegistro: '',
-    estado: '',
     activo: true,
   });
 
@@ -66,9 +63,6 @@ export const FormClient: React.FC = () => {
         pais: '',
         telefono: '',
         correoCorporativo: '',
-        correoElectronico: '',
-        fechaRegistro: '',
-        estado: '',
         activo: true,
       });
 
@@ -179,41 +173,6 @@ export const FormClient: React.FC = () => {
               value={cliente.correoCorporativo}
               onChange={handleChange}
               placeholder="Ingrese el correo corporativo"
-              className="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div>
-            <label className="block text-gray-700">Correo Electrónico</label>
-            <input
-              type="email"
-              name="correoElectronico"
-              value={cliente.correoElectronico}
-              onChange={handleChange}
-              placeholder="Ingrese el correo electrónico"
-              className="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div>
-            <label className="block text-gray-700">Fecha de Registro</label>
-            <input
-              type="date"
-              name="fechaRegistro"
-              value={cliente.fechaRegistro}
-              onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div>
-            <label className="block text-gray-700">Estado</label>
-            <input
-              type="text"
-              name="estado"
-              value={cliente.estado}
-              onChange={handleChange}
-              placeholder="Ingrese el estado"
               className="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>

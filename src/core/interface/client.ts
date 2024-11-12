@@ -1,15 +1,12 @@
-// src/core/interface/client.ts
+
 export interface Client {
-  id?: number;  // Se ha hecho opcional
-  nombre: string;
-  correoElectronico: string;
-  telefono: string;
-  direccion: string;
-  fechaRegistro: string;
-  estado: string;
+  id: number; 
   nit: string;
+  nombre: string;
+  direccion: string;
   ciudad: string;
   pais: string;
+  telefono: string;
   correoCorporativo: string;
   activo: boolean;
 }
