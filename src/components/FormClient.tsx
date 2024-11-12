@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Client } from '../core/interface/client';
+import { useCreateClient } from '../hooks/useCreateClient';
 
 export const FormClient: React.FC = () => {
+  const { mutate: createClient, isError, isSuccess, error } = useCreateClient();
   const [cliente, setCliente] = useState<Client>({
-    id: 0, 
+    id: 0,
     nit: '',
     nombre: '',
     direccion: '',
@@ -12,11 +14,11 @@ export const FormClient: React.FC = () => {
     telefono: '',
     correoCorporativo: '',
     correoElectronico: '',
-    fechaRegistro: '', 
+    fechaRegistro: '',
     estado: '',
     activo: true,
   });
-  
+
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -45,31 +47,44 @@ export const FormClient: React.FC = () => {
       return;
     }
 
-    setSuccessMessage('Cliente creado exitosamente');
-    setErrorMessage(null);
-
-    setCliente({
-      id: 0, 
-      nit: '',
-      nombre: '',
-      direccion: '',
-      ciudad: '',
-      pais: '',
-      telefono: '',
-      correoCorporativo: '',
-      correoElectronico: '',
-      fechaRegistro: '', 
-      estado: '',
-      activo: true,
-    });
-
-    setTimeout(() => setSuccessMessage(null), 3000);
+    // Elimina la propiedad `id` antes de enviarlo al servidor
+    const { id, ...clienteSinId } = cliente;
+    createClient(clienteSinId);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      setSuccessMessage('Cliente creado exitosamente');
+      setErrorMessage(null);
+
+      setCliente({
+        id: 0,
+        nit: '',
+        nombre: '',
+        direccion: '',
+        ciudad: '',
+        pais: '',
+        telefono: '',
+        correoCorporativo: '',
+        correoElectronico: '',
+        fechaRegistro: '',
+        estado: '',
+        activo: true,
+      });
+
+      setTimeout(() => setSuccessMessage(null), 3000);
+    }
+
+    if (isError) {
+      setErrorMessage(error?.message || 'Hubo un error al crear el cliente. Intente de nuevo.');
+      setSuccessMessage(null);
+    }
+  }, [isSuccess, isError, error]);
 
   return (
     <div className="max-w-3xl mx-auto mt-12 p-6 bg-white rounded-lg shadow-md font-poppins">
       <h2 className="text-2xl font-bold mb-6 text-center">Crear Nuevo Cliente</h2>
-      
+
       {successMessage && (
         <div className="text-green-600 text-center mb-4 font-bold">
           {successMessage}
@@ -95,6 +110,7 @@ export const FormClient: React.FC = () => {
               className="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
+
           <div>
             <label className="block text-gray-700">Nombre</label>
             <input
@@ -106,6 +122,7 @@ export const FormClient: React.FC = () => {
               className="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
+
           <div>
             <label className="block text-gray-700">Dirección</label>
             <input
@@ -117,6 +134,7 @@ export const FormClient: React.FC = () => {
               className="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
+
           <div>
             <label className="block text-gray-700">Ciudad</label>
             <input
@@ -128,6 +146,7 @@ export const FormClient: React.FC = () => {
               className="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
+
           <div>
             <label className="block text-gray-700">País</label>
             <input
@@ -139,6 +158,7 @@ export const FormClient: React.FC = () => {
               className="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
+
           <div>
             <label className="block text-gray-700">Teléfono</label>
             <input
@@ -150,7 +170,8 @@ export const FormClient: React.FC = () => {
               className="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
-          <div className="md:col-span-2">
+
+          <div>
             <label className="block text-gray-700">Correo Corporativo</label>
             <input
               type="email"
@@ -161,17 +182,54 @@ export const FormClient: React.FC = () => {
               className="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
+
+          <div>
+            <label className="block text-gray-700">Correo Electrónico</label>
+            <input
+              type="email"
+              name="correoElectronico"
+              value={cliente.correoElectronico}
+              onChange={handleChange}
+              placeholder="Ingrese el correo electrónico"
+              className="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label className="block text-gray-700">Fecha de Registro</label>
+            <input
+              type="date"
+              name="fechaRegistro"
+              value={cliente.fechaRegistro}
+              onChange={handleChange}
+              className="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label className="block text-gray-700">Estado</label>
+            <input
+              type="text"
+              name="estado"
+              value={cliente.estado}
+              onChange={handleChange}
+              placeholder="Ingrese el estado"
+              className="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div className="flex items-center mt-2">
+            <input
+              type="checkbox"
+              name="activo"
+              checked={cliente.activo}
+              onChange={handleChange}
+              className="mr-2 leading-tight"
+            />
+            <label className="text-gray-700">Activo</label>
+          </div>
         </div>
-        <div className="flex items-center mt-4">
-          <input
-            type="checkbox"
-            name="activo"
-            checked={cliente.activo}
-            onChange={handleChange}
-            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-          />
-          <label className="ml-2 text-gray-700">Activo</label>
-        </div>
+
         <button
           type="submit"
           className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 mt-4"
