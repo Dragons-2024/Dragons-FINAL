@@ -4,6 +4,7 @@ import { useGetOpportunities } from "../hooks/useGetOpportunities";
 import { ClientDetailActivities } from "./ClientDetailActivities";
 import { ErrorMessage } from "./ErrorMessage";
 import { Loading } from "./Loading";
+import { Link } from "react-router-dom";
 
 interface ClientOportunityListProps {
     ClientName: string;
@@ -73,7 +74,7 @@ export function ClientOportunityList({ ClientName }: ClientOportunityListProps) 
                         <tr key={oportunity.id} className="border-b border-gray-200 hover:bg-gray-100 text-xs md:text-sm">
                             <td className="py-3 px-6 text-center whitespace-nowrap">{oportunity.id}</td>
                             <td className="py-3 px-6 text-center whitespace-nowrap">{oportunity.cliente}</td>
-                            <td className="py-3 px-6 text-center whitespace-nowrap">{oportunity.nombreNegocio}</td>
+                            <td className="py-3 px-6 text-center whitespace-nowrap"><Link state={oportunity} className="hover:text-blue-500" to={`/detalles-oportunidad/:${oportunity.nombreNegocio}`}>{oportunity.nombreNegocio}</Link></td>
                             <td className="py-3 px-6 text-center whitespace-nowrap">{oportunity.lineaNegocio}</td>
                             <td className="py-3 px-6 text-center">{oportunity.descripcionOportunidad}</td>
                             <td className="py-3 px-6 text-center whitespace-nowrap">{oportunity.valorEstimado}</td>
