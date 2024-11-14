@@ -4,6 +4,7 @@ import { useGetOpportunities } from "../hooks/useGetOpportunities";
 import { ErrorMessage } from "./ErrorMessage";
 import { Loading } from "./Loading";
 import { Oportunidad } from "../core/interface/opportunity";
+import { Link } from "react-router-dom";
 
 export const OpportunityList: React.FC = () => {
     const { data: oportunidades, isLoading, error } = useGetOpportunities();
@@ -42,7 +43,7 @@ export const OpportunityList: React.FC = () => {
                                         {oportunidad.id}
                                     </td>
                                     <td className="py-3 px-6 text-left">{oportunidad.cliente}</td>
-                                    <td className="py-3 px-6 text-left">{oportunidad.nombreNegocio}</td>
+                                    <td className="py-3 px-6 text-left"><Link state={oportunidad} className="hover:text-blue-500" to={`/detalles-oportunidad/:${oportunidad.nombreNegocio}`}>{oportunidad.nombreNegocio}</Link></td>
                                     <td className="py-3 px-6 text-left">{oportunidad.lineaNegocio}</td>
                                     <td className="py-3 px-6 text-left">{oportunidad.descripcionOportunidad}</td>
                                     <td className="py-3 px-6 text-left">{oportunidad.valorEstimado}</td>
