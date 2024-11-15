@@ -5,7 +5,8 @@ import { deleteOpportunity } from "../services/OpportunityServices";
 export const useDeleteOpportunity = () => {
     const queryClient = useQueryClient();
 
-    return useMutation<void, Error, string>({ mutationFn: (id: string) => deleteOpportunity(id), 
+    return useMutation<void, Error, string>({
+        mutationFn: deleteOpportunity,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["opportunities"] });
         },

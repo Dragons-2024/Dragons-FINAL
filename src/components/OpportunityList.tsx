@@ -12,7 +12,6 @@ import { Dialog } from "@headlessui/react";
 export const OpportunityList: React.FC = () => {
     const { data: oportunidades, isLoading, error } = useGetOpportunities();
     const { mutate: deleteOpportunity } = useDeleteOpportunity();
-    const [isDeleting, setIsDeleting] = useState(false);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [selectedOpportunity, setSelectedOpportunity] = useState<Oportunidad | null>(null);
     const [message, setMessage] = useState("");
@@ -31,7 +30,7 @@ export const OpportunityList: React.FC = () => {
     };
 
     const handleConfirmDelete = () => {
-        if (selectedOpportunity) {
+        if (selectedOpportunity && selectedOpportunity.id) {
             deleteOpportunity(String(selectedOpportunity.id), {
                 onSuccess: () => {
                     setMessage("Oportunidad eliminada correctamente");
@@ -130,9 +129,8 @@ export const OpportunityList: React.FC = () => {
                             <button
                                 onClick={handleConfirmDelete}
                                 className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded"
-                                disabled={isDeleting}
                             >
-                                {isDeleting ? "Eliminando..." : "Aceptar"}
+                                Aceptar
                             </button>
                         </div>
                     </div>
