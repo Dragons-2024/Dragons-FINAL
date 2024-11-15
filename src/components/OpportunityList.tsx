@@ -13,11 +13,11 @@ export const OpportunityList: React.FC = () => {
 
   const handleDelete = (id?: number) => {
     if (id === undefined) {
-      console.error("Error: ID is undefined. Cannot delete opportunity without an ID.");
+      console.error("Error: No se puede eliminar la oportunidad sin un ID.");
       return;
     }
     
-    const confirmDelete = window.confirm("Are you sure you want to delete this opportunity?");
+    const confirmDelete = window.confirm("¿Está seguro de que desea eliminar esta oportunidad?");
     if (confirmDelete) {
       deleteOpportunity(id);
     }
