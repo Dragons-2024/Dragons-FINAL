@@ -2,18 +2,19 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useGetOpportunities } from "../hooks/useGetOpportunities";
+import { useDeleteOpportunity } from "../hooks/useDeleteOpportunity";
 import { ErrorMessage } from "./ErrorMessage";
 import { Loading } from "./Loading";
 import { Oportunidad } from "../core/interface/opportunity";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { Dialog } from "@headlessui/react";
 
 export const OpportunityList: React.FC = () => {
     const { data: oportunidades, isLoading, error } = useGetOpportunities();
+    const { mutate: deleteOpportunity } = useDeleteOpportunity();
+    const [isDeleting, setIsDeleting] = useState(false);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [selectedOpportunity, setSelectedOpportunity] = useState<Oportunidad | null>(null);
-    const [isDeleting, setIsDeleting] = useState(false);
     const [message, setMessage] = useState("");
     const [opportunities, setOpportunities] = useState<Oportunidad[]>([]);
 
@@ -29,21 +30,18 @@ export const OpportunityList: React.FC = () => {
         setIsDialogOpen(true);
     };
 
-    const handleConfirmDelete = async () => {
+    const handleConfirmDelete = () => {
         if (selectedOpportunity) {
-            setIsDeleting(true);
-            try {
-                await axios.delete(`https://dragons-final-api.onrender.com/opportunities/${selectedOpportunity.id}`);
-                setMessage("Oportunidad eliminada correctamente");
-                // Actualizar la lista de oportunidades después de eliminar
-                setOpportunities(opportunities.filter((op: Oportunidad) => op.id !== selectedOpportunity.id));
-            } catch (error) {
-                console.error("Error deleting opportunity:", error);
-                setMessage("Error al eliminar la oportunidad");
-            } finally {
-                setIsDeleting(false);
-                setIsDialogOpen(false);
-            }
+            deleteOpportunity(String(selectedOpportunity.id), {
+                onSuccess: () => {
+                    setMessage("Oportunidad eliminada correctamente");
+                    setOpportunities(opportunities.filter((op: Oportunidad) => op.id !== selectedOpportunity.id));
+                    setIsDialogOpen(false);
+                },
+                onError: () => {
+                    setMessage("Error al eliminar la oportunidad");
+                },
+            });
         }
     };
 
@@ -86,7 +84,7 @@ export const OpportunityList: React.FC = () => {
                                         {oportunidad.id}
                                     </td>
                                     <td className="py-3 px-6 text-left">{oportunidad.cliente}</td>
-                                    <td className="py-3 px-6 text-left"><Link state={oportunidad} className="hover:text-blue-500" to={`/detalles-oportunidad/:${oportunidad.nombreNegocio}`}>{oportunidad.nombreNegocio}</Link></td>
+                                    <td className="py-3 px-6 text-left"><Link state={oportunidad} className="hover:text-blue-500" to={`/detalles-oportunidad/${oportunidad.nombreNegocio}`}>{oportunidad.nombreNegocio}</Link></td>
                                     <td className="py-3 px-6 text-left">{oportunidad.lineaNegocio}</td>
                                     <td className="py-3 px-6 text-left">{oportunidad.descripcionOportunidad}</td>
                                     <td className="py-3 px-6 text-left">{oportunidad.valorEstimado}</td>
