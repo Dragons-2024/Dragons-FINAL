@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useGetOpportunities } from "../hooks/useGetOpportunities";
@@ -6,21 +7,46 @@ import { ErrorMessage } from "./ErrorMessage";
 import { Loading } from "./Loading";
 import { Oportunidad } from "../core/interface/opportunity";
 import { Link } from "react-router-dom";
+import { Dialog } from "@headlessui/react";
 
 export const OpportunityList: React.FC = () => {
   const { data: oportunidades, isLoading, error } = useGetOpportunities();
   const { mutate: deleteOpportunity } = useDeleteOpportunity();
 
-  const handleDelete = (id?: number) => {
-    if (id === undefined) {
-      console.error("Error: No se puede eliminar la oportunidad sin un ID.");
-      return;
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [selectedOpportunity, setSelectedOpportunity] = useState<Oportunidad | null>(null);
+  const [message, setMessage] = useState("");
+  const [opportunities, setOpportunities] = useState<Oportunidad[]>([]);
+
+  useEffect(() => {
+    if (oportunidades) {
+      setOpportunities(oportunidades);
     }
-    
-    const confirmDelete = window.confirm("¿Está seguro de que desea eliminar esta oportunidad?");
-    if (confirmDelete) {
-      deleteOpportunity(id);
+  }, [oportunidades]);
+
+  const handleDeleteClick = (oportunidad: Oportunidad) => {
+    setSelectedOpportunity(oportunidad);
+    setMessage("");
+    setIsDialogOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (selectedOpportunity && selectedOpportunity.id) {
+      deleteOpportunity(String(selectedOpportunity.id), {
+        onSuccess: () => {
+          setMessage("Oportunidad eliminada correctamente");
+          setOpportunities(opportunities.filter((op: Oportunidad) => op.id !== selectedOpportunity.id));
+          setIsDialogOpen(false);
+        },
+        onError: () => {
+          setMessage("Error al eliminar la oportunidad");
+        },
+      });
     }
+  };
+
+  const handleCancelDelete = () => {
+    setIsDialogOpen(false);
   };
 
   if (isLoading) {
@@ -28,15 +54,18 @@ export const OpportunityList: React.FC = () => {
   }
 
   if (error) {
-    return (
-      <ErrorMessage message={`No se ha podido cargar la información. Error ${error.message}`} />
-    );
+    return <ErrorMessage message={`No se ha podido cargar la información. Error: ${error.message}`} />;
   }
 
-  if (oportunidades && oportunidades.length > 0) {
-    return (
-      <div className="p-4 font-poppins">
-        <div className="overflow-x-auto">
+  return (
+    <div className="p-4 font-poppins">
+      <div className="overflow-x-auto">
+        {message && (
+          <div className={`mb-4 ${message.includes("Error") ? "text-red-500" : "text-green-500"}`}>
+            {message}
+          </div>
+        )}
+        {opportunities.length > 0 ? (
           <table className="min-w-full bg-white border border-gray-200 shadow-lg">
             <thead>
               <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
@@ -52,20 +81,15 @@ export const OpportunityList: React.FC = () => {
               </tr>
             </thead>
             <tbody className="text-gray-700 text-sm font-light">
-              {oportunidades.map((oportunidad: Oportunidad) => (
-                <tr
-                  key={oportunidad.id}
-                  className="border-b border-gray-200 hover:bg-gray-100"
-                >
-                  <td className="py-3 px-6 text-left whitespace-nowrap">
-                    {oportunidad.id}
-                  </td>
+              {opportunities.map((oportunidad: Oportunidad) => (
+                <tr key={oportunidad.id} className="border-b border-gray-200 hover:bg-gray-100">
+                  <td className="py-3 px-6 text-left whitespace-nowrap">{oportunidad.id}</td>
                   <td className="py-3 px-6 text-left">{oportunidad.cliente}</td>
                   <td className="py-3 px-6 text-left">
                     <Link
                       state={oportunidad}
                       className="hover:text-blue-500"
-                      to={`/detalles-oportunidad/:${oportunidad.nombreNegocio}`}
+                      to={`/detalles-oportunidad/${oportunidad.nombreNegocio}`}
                     >
                       {oportunidad.nombreNegocio}
                     </Link>
@@ -80,7 +104,7 @@ export const OpportunityList: React.FC = () => {
                       <FontAwesomeIcon icon={faEdit} />
                     </button>
                     <button
-                      onClick={() => handleDelete(oportunidad.id)}
+                      onClick={() => handleDeleteClick(oportunidad)}
                       className="text-xs p-1 bg-red-600 rounded-md text-white hover:bg-red-700"
                     >
                       <FontAwesomeIcon icon={faTrash} />
@@ -90,10 +114,28 @@ export const OpportunityList: React.FC = () => {
               ))}
             </tbody>
           </table>
-        </div>
+        ) : (
+          <p className="text-center mt-4">No hay oportunidades disponibles.</p>
+        )}
       </div>
-    );
-  } else {
-    return <p className="text-center mt-4">No hay oportunidades disponibles.</p>;
-  }
+
+      <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)} className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black opacity-50" aria-hidden="true"></div>
+        <div className="bg-white rounded-lg p-6 max-w-sm w-full mx-auto z-50">
+          <Dialog.Title className="text-lg font-bold">Confirmar Eliminación</Dialog.Title>
+          <Dialog.Description className="mt-2">
+            ¿Estás seguro de que deseas eliminar esta oportunidad?
+          </Dialog.Description>
+          <div className="mt-4 flex justify-end space-x-2">
+            <button onClick={handleCancelDelete} className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-1 px-2 rounded">
+              Cancelar
+            </button>
+            <button onClick={handleConfirmDelete} className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded">
+              Aceptar
+            </button>
+          </div>
+        </div>
+      </Dialog>
+    </div>
+  );
 };
