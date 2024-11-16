@@ -8,6 +8,7 @@ import { Loading } from "./Loading";
 import { Oportunidad } from "../core/interface/opportunity";
 import { Link } from "react-router-dom";
 import { Dialog } from "@headlessui/react";
+import { OpportunityUpdateForm } from "../components/UpdateOpportunityForm";
 
 export const OpportunityList: React.FC = () => {
   const { data: oportunidades, isLoading, error } = useGetOpportunities();
@@ -17,6 +18,7 @@ export const OpportunityList: React.FC = () => {
   const [selectedOpportunity, setSelectedOpportunity] = useState<Oportunidad | null>(null);
   const [message, setMessage] = useState("");
   const [opportunities, setOpportunities] = useState<Oportunidad[]>([]);
+  const [isEditing, setIsEditing] = useState(false); // Controla si estamos editando
 
   useEffect(() => {
     if (oportunidades) {
@@ -28,6 +30,11 @@ export const OpportunityList: React.FC = () => {
     setSelectedOpportunity(oportunidad);
     setMessage("");
     setIsDialogOpen(true);
+  };
+
+  const handleEditClick = (oportunidad: Oportunidad) => {
+    setSelectedOpportunity(oportunidad);
+    setIsEditing(true); // Muestra el formulario de edición
   };
 
   const handleConfirmDelete = () => {
@@ -47,6 +54,11 @@ export const OpportunityList: React.FC = () => {
 
   const handleCancelDelete = () => {
     setIsDialogOpen(false);
+  };
+
+  const handleCloseForm = () => {
+    setIsEditing(false); // Oculta el formulario de edición
+    setSelectedOpportunity(null);
   };
 
   if (isLoading) {
@@ -100,7 +112,10 @@ export const OpportunityList: React.FC = () => {
                   <td className="py-3 px-6 text-left">{oportunidad.fechaEstimadaRealizacion}</td>
                   <td className="py-3 px-6 text-left">{oportunidad.estadoOportunidad}</td>
                   <td className="flex gap-1 justify-center mt-2">
-                    <button className="text-xs p-1 bg-green-600 rounded-md text-white hover:bg-green-700">
+                    <button
+                      onClick={() => handleEditClick(oportunidad)}
+                      className="text-xs p-1 bg-green-600 rounded-md text-white hover:bg-green-700"
+                    >
                       <FontAwesomeIcon icon={faEdit} />
                     </button>
                     <button
@@ -118,6 +133,10 @@ export const OpportunityList: React.FC = () => {
           <p className="text-center mt-4">No hay oportunidades disponibles.</p>
         )}
       </div>
+
+      {isEditing && selectedOpportunity && (
+        <OpportunityUpdateForm setClose={handleCloseForm} initialData={selectedOpportunity} />
+      )}
 
       <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)} className="fixed inset-0 flex items-center justify-center z-50">
         <div className="fixed inset-0 bg-black opacity-50" aria-hidden="true"></div>
