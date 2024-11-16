@@ -5,7 +5,7 @@ import { Oportunidad } from "../core/interface/opportunity";
 
 interface OpportunityFormProps {
   setClose: () => void;
-  initialData: Oportunidad; // Datos iniciales de la oportunidad a actualizar
+  initialData: Oportunidad; 
 }
 
 const BusinessLineOptions = [
@@ -25,13 +25,13 @@ export function OpportunityUpdateForm({ setClose, initialData }: OpportunityForm
     reset,
     formState: { errors },
   } = useForm<Oportunidad>({
-    defaultValues: initialData, // Valores iniciales del formulario
+    defaultValues: initialData, 
   });
 
   const onSubmit = (data: Oportunidad) => {
     const updatedOpportunity = {
       ...data,
-      id: initialData.id, // Mantener el ID original
+      id: initialData.id, 
     };
 
     updateOpportunity({
@@ -45,15 +45,15 @@ export function OpportunityUpdateForm({ setClose, initialData }: OpportunityForm
 
   return (
     <Dialog
-      open={true} // Modal siempre visible mientras no se cierre
+      open={true} 
       onClose={setClose}
-      className="fixed inset-0 z-50 flex items-center justify-center"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
     >
       {/* Fondo oscuro */}
       <div className="fixed inset-0 bg-black opacity-50" aria-hidden="true"></div>
-      
+
       {/* Contenedor del modal */}
-      <div className="bg-white rounded-lg shadow-lg w-full max-w-lg mx-auto p-6 z-50">
+      <div className="bg-white rounded-lg shadow-lg w-full max-w-xl md:max-w-3xl mx-auto p-6 z-50 overflow-auto max-h-screen">
         <Dialog.Title className="text-lg font-bold text-gray-700">
           Actualizar Oportunidad
         </Dialog.Title>
