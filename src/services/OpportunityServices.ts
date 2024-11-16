@@ -24,4 +24,13 @@ export const deleteOpportunity = async (id: number | string): Promise<void> => {
         throw new Error("Error al eliminar la oportunidad");
     }
 };
+export const updateOpportunity = async (id: number | string, opportunity: Oportunidad) => {
+    try {
+        const response = await axiosApi.put(`/opportunities/${id}`, opportunity);
+        return response;
+    } catch (error) {
+        console.log(error);
+        throw new Error("Error al actualizar la oportunidad");
+    }
+}
 
