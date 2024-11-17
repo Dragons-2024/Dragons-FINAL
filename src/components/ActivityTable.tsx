@@ -7,12 +7,16 @@ import { ActivityType } from "../core/interface/Activities";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Oportunidad } from "../core/interface/opportunity";
+import { DeleteDialog } from "./DeleteDialog";
+import { useDeleteActivity } from "../hooks/useDeleteActivity";
 
 
 export function ActivityTable({oportunity}:{oportunity:Oportunidad}) {
     const { data: Activities, isLoading, error } = useGetActivity(oportunity.nombreNegocio);
     const [FilterActivities, setActivities] = useState<ActivityType[]>();
-
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [ActivityId,setActivityId]=useState<number>(0);
+    const Mutation=useDeleteActivity(ActivityId);
     useEffect(() => {
         if (Activities !== undefined) {
             const FilterActivities = Activities;
@@ -28,6 +32,19 @@ export function ActivityTable({oportunity}:{oportunity:Oportunidad}) {
     {id:5,name:"Descripcion"},
     {id:6,name:"Accion"}
  ]
+
+ const handleConfirmDelete = () => {
+    Mutation
+  };
+
+  const handleSetId=(id:number)=>{
+    setActivityId(id);
+    setIsDialogOpen(true);
+  }
+
+  const handleCancelDelete = () => {
+    setIsDialogOpen(false);
+  };
 
     if (isLoading) {
         return (<Loading />);
@@ -74,12 +91,12 @@ export function ActivityTable({oportunity}:{oportunity:Oportunidad}) {
                         <button className="text-xs p-1 bg-green-600 rounded-md text-white hover:bg-green-700">
                             <FontAwesomeIcon icon={faEdit} />
                         </button>
-                        <button 
+                        <button onClick={()=>handleSetId(activity.id)}
                         className="text-xs p-1 bg-red-600 rounded-md text-white hover:bg-red-700">
                             <FontAwesomeIcon icon={faTrash} />
                         </button>
                     </div>
-                    {/* <WindowDelete open={DeleteWindow} setclose={setCloseWindow} activity={activity}/> */}
+                    <DeleteDialog object={"e seguimiento"} isDialogOpen={isDialogOpen} handleConfirmDelete={handleConfirmDelete} handleCancelDelete={handleCancelDelete}/>
                     </td>
                                 </tr>
                             ))}
