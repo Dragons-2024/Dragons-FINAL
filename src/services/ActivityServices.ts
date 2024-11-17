@@ -14,6 +14,6 @@ export const addActivity = async (activity: ActivityType) => {
 };
 
 export const getActivity = async ():Promise<ActivityType[]> => {
-  const response= await axiosApi.get("/activities");
+  const response= await axiosApi.get(`/activities`);
   return response.data;
 };

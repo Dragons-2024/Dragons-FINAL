@@ -31,9 +31,9 @@ export function ActivityForm({ BusinessName, setclose }: ActivityFormProps) {
   const onSubmit = (data: ActivityFormType) => {
     console.log("Activity Information: ", data);
     CreateActivity({
-      ...data,
       id: Math.floor(Math.random() * 1000),
       BusinessName: BusinessName,
+      ...data
     });
     setclose();
     reset();
@@ -115,7 +115,7 @@ export function ActivityForm({ BusinessName, setclose }: ActivityFormProps) {
                 className="text-red-500 hover:text-red-700 focus:outline-none hover:bg-red-200 rounded-full p-1"
                 aria-label="Eliminar Cliente"
               >
-                <img src="./src/assets/delete.svg" alt="Eliminar" />
+                <img src="../src/assets/delete.svg" alt="Eliminar" />
               </button>
             </div>
           ))}
