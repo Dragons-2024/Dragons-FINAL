@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
 import { Oportunidad } from "../core/interface/opportunity";
-import { useGetOpportunities } from "../hooks/useGetOpportunities";
 import { ClientDetailActivities } from "./ClientDetailActivities";
 import { ErrorMessage } from "./ErrorMessage";
 import { Loading } from "./Loading";
 import { Link } from "react-router-dom";
+import { useGetOpportunitiesFiltered } from "../hooks/useGetOportunityFiltred";
 
 interface ClientOportunityListProps {
     ClientName: string;
 }
 
 export function ClientOportunityList({ ClientName }: ClientOportunityListProps) {
-    const { data: oportunities, error, isLoading } = useGetOpportunities();
+    const { data: oportunities, error, isLoading } = useGetOpportunitiesFiltered(ClientName);
     console.log(oportunities);
     let FilterOportunities: Oportunidad[] = [];
     if (oportunities !== undefined) {
-        FilterOportunities = oportunities.filter(opportunity => opportunity.cliente === ClientName);
+        FilterOportunities = oportunities;
     }
     
     

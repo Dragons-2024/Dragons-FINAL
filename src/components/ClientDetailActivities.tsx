@@ -8,14 +8,12 @@ import { HeaderProps } from "../core/interface/Activities";
 
 
 export function ClientDetailActivities(oportunity: Oportunidad) {
-    const { data: Activities, error, isLoading } = useGetActivity();
+    const { data: Activities, error, isLoading } = useGetActivity(oportunity.nombreNegocio);
     const [ActivitiesFilter, setActivities] = useState<ActivityType[]>([]);
 
     useEffect(() => {
         if (Activities !== undefined) {
-            const FilterActivities = Activities.filter(
-                (activity) => activity.BusinessName === oportunity.nombreNegocio
-            );
+            const FilterActivities = Activities;
             setActivities(FilterActivities);
         }
     }, [Activities, oportunity.nombreNegocio]);
