@@ -49,10 +49,10 @@ export function OpportunityUpdateForm({ setClose, initialData }: OpportunityForm
       onClose={setClose}
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
     >
-      {/* Fondo oscuro */}
+      
       <div className="fixed inset-0 bg-black opacity-50" aria-hidden="true"></div>
 
-      {/* Contenedor del modal */}
+      
       <div className="bg-white rounded-lg shadow-lg w-full max-w-xl md:max-w-3xl mx-auto p-6 z-50 overflow-auto max-h-screen">
         <Dialog.Title className="text-lg font-bold text-gray-700">
           Actualizar Oportunidad
