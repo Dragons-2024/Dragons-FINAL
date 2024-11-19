@@ -8,7 +8,7 @@ export const useUpdateCliente = () => {
   return useMutation({
     mutationFn: ({ id, cliente }: { id: number; cliente: Client }) => patchClient(id, cliente),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["clientes"] }); // Invalida la caché de clientes
+      queryClient.invalidateQueries({ queryKey: ["Clientes"] }); // Invalida la caché de clientes
     },
     onError: (error) => {
       console.error("Error al actualizar el cliente:", error);
