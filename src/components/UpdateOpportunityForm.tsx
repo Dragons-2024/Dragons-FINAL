@@ -5,15 +5,8 @@ import { Oportunidad } from "../core/interface/opportunity";
 
 interface OpportunityFormProps {
   setClose: () => void;
-  initialData: Oportunidad; 
+  initialData: Oportunidad;
 }
-
-const BusinessLineOptions = [
-  { id: 1, name: "Outsourcing Recursos" },
-  { id: 2, name: "Desarrollo Web" },
-  { id: 3, name: "Desarrollo Mobile" },
-  { id: 4, name: "Consultoría TI" },
-];
 
 const EstadoOptions = ["Apertura", "En Estudio", "Orden de Compra", "Finalizada"];
 
@@ -25,13 +18,13 @@ export function OpportunityUpdateForm({ setClose, initialData }: OpportunityForm
     reset,
     formState: { errors },
   } = useForm<Oportunidad>({
-    defaultValues: initialData, 
+    defaultValues: initialData,
   });
 
   const onSubmit = (data: Oportunidad) => {
     const updatedOpportunity = {
       ...data,
-      id: initialData.id, 
+      id: initialData.id,
     };
 
     updateOpportunity({
@@ -43,16 +36,31 @@ export function OpportunityUpdateForm({ setClose, initialData }: OpportunityForm
     reset();
   };
 
+  const getFilteredOptions = (estadoActual: string) => {
+    switch (estadoActual) {
+      case "Apertura":
+        return EstadoOptions.slice(1); 
+      case "En Estudio":
+        return EstadoOptions.slice(2); 
+      case "Orden de Compra":
+        return EstadoOptions.slice(3); 
+      case "Finalizada":
+        return []; 
+      default:
+        return EstadoOptions;
+    }
+  };
+
+  const estadoActual = initialData.estadoOportunidad; 
+
   return (
     <Dialog
-      open={true} 
+      open={true}
       onClose={setClose}
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
     >
-      
       <div className="fixed inset-0 bg-black opacity-50" aria-hidden="true"></div>
 
-      
       <div className="bg-white rounded-lg shadow-lg w-full max-w-xl md:max-w-3xl mx-auto p-6 z-50 overflow-auto max-h-screen">
         <Dialog.Title className="text-lg font-bold text-gray-700">
           Actualizar Oportunidad
@@ -91,24 +99,6 @@ export function OpportunityUpdateForm({ setClose, initialData }: OpportunityForm
           </section>
 
           <section className="flex flex-col gap-2">
-            <label htmlFor="lineaNegocio" className="text-gray-700 font-semibold">
-              Línea de Negocio:
-            </label>
-            <select
-              id="lineaNegocio"
-              {...register("lineaNegocio", { required: true })}
-              className="bg-blue-100 border border-gray-300 rounded-md p-2 focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
-            >
-              {BusinessLineOptions.map((line) => (
-                <option key={line.id} value={line.name}>
-                  {line.name}
-                </option>
-              ))}
-            </select>
-            {errors.lineaNegocio && <p className="text-red-500 text-xs">Campo obligatorio</p>}
-          </section>
-
-          <section className="flex flex-col gap-2">
             <label htmlFor="descripcionOportunidad" className="text-gray-700 font-semibold">
               Descripción Oportunidad:
             </label>
@@ -136,18 +126,20 @@ export function OpportunityUpdateForm({ setClose, initialData }: OpportunityForm
 
           <section className="flex flex-col gap-2">
             <label htmlFor="estadoOportunidad" className="text-gray-700 font-semibold">
-              Estado Oportunidad:
+              Estado Actual: <span className="text-blue-600">{estadoActual}</span>
             </label>
             <select
               id="estadoOportunidad"
               {...register("estadoOportunidad", { required: true })}
               className="bg-blue-100 border border-gray-300 rounded-md p-2 focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
+              disabled={estadoActual === "Finalizada"} 
             >
-              {EstadoOptions.map((estado) => (
-                <option key={estado} value={estado}>
-                  {estado}
-                </option>
-              ))}
+              {estadoActual !== "Finalizada" &&
+                getFilteredOptions(estadoActual).map((estado) => (
+                  <option key={estado} value={estado}>
+                    {estado}
+                  </option>
+                ))}
             </select>
             {errors.estadoOportunidad && <p className="text-red-500 text-xs">Campo obligatorio</p>}
           </section>
