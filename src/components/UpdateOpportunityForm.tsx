@@ -39,13 +39,13 @@ export function OpportunityUpdateForm({ setClose, initialData }: OpportunityForm
   const getFilteredOptions = (estadoActual: string) => {
     switch (estadoActual) {
       case "Apertura":
-        return EstadoOptions.slice(1); 
+        return ["Apertura", ...EstadoOptions.slice(1)];
       case "En Estudio":
-        return EstadoOptions.slice(2); 
+        return ["En Estudio", ...EstadoOptions.slice(2)];
       case "Orden de Compra":
-        return EstadoOptions.slice(3); 
+        return ["Orden de Compra", ...EstadoOptions.slice(3)];
       case "Finalizada":
-        return []; 
+        return ["Finalizada"];
       default:
         return EstadoOptions;
     }
@@ -129,11 +129,13 @@ export function OpportunityUpdateForm({ setClose, initialData }: OpportunityForm
               Estado Actual: <span className="text-blue-600">{estadoActual}</span>
             </label>
             <select
-              id="estadoOportunidad"
-              {...register("estadoOportunidad", { required: true })}
-              className="bg-blue-100 border border-gray-300 rounded-md p-2 focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
-              disabled={estadoActual === "Finalizada"} 
-            >
+               id="estadoOportunidad"
+               {...register("estadoOportunidad", {
+                 required: estadoActual !== "Finalizada", // Aquí verificamos si no es "Finalizada" para aplicar la validación
+               })}
+               className="bg-blue-100 border border-gray-300 rounded-md p-2 focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
+               disabled={estadoActual === "Finalizada"}
+             >
               {estadoActual !== "Finalizada" &&
                 getFilteredOptions(estadoActual).map((estado) => (
                   <option key={estado} value={estado}>
