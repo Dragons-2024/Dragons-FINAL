@@ -17,3 +17,12 @@ export const getActivity = async ():Promise<ActivityType[]> => {
   const response= await axiosApi.get(`/activities`);
   return response.data;
 };
+
+export const deleteActivity= async (id: number): Promise<void> => {
+  try {
+      await axiosApi.delete(`/activities/${id}`);
+  } catch (error) {
+      console.log(error);
+      throw new Error("Error al eliminar la oportunidad");
+  }
+};
