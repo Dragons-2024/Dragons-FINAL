@@ -9,7 +9,7 @@ export const useCreateActivity = () => {
   return useMutation({
     mutationFn: (activity: ActivityType) => addActivity(activity),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["activities"] });
+      queryClient.invalidateQueries({ queryKey: ["Activities"] });
     },
     onError: (error) => {
       console.error("Error al crear la actividad:", error);

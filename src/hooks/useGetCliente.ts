@@ -1,4 +1,4 @@
-// hooks/useGetClientes.ts
+
 import { useQuery } from "@tanstack/react-query";
 import { getClientes } from "../services/ClienteServices"; 
 
