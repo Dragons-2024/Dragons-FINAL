@@ -8,7 +8,7 @@ export const useCreateClient = () => {
     return useMutation<Client, Error, Omit<Client, 'id'>>({
       mutationFn: (client: Omit<Client, 'id'>) => createCliente(client),
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["Clients"] });
+        queryClient.invalidateQueries({ queryKey: ["Clientes"] });
       },
       onError: (error: Error) => {
         console.error("Error al crear el cliente:", error.message);

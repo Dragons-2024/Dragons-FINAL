@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Client } from "../core/interface/client";
 import { useToggleClientStatus } from "../hooks/useToggleClientStatus";
-import UpdateClienteForm from "./UpdateClienteForm";
+import {UpdateClienteForm} from "./UpdateClienteForm";
 
 interface ClientRowProps {
   cliente: Client;

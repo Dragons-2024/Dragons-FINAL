@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useCreateOpportunity } from "../hooks/useCreateOpportunity";
 import { Oportunidad } from "../core/interface/opportunity";
-
+import { useGetNamesClientes } from "../hooks/useGetNamesClientes";
 interface OpportunityFormProps {
   setClose: () => void;
 }
@@ -13,14 +13,12 @@ const BusinessLineOptions = [
   { id: 4, name: "Consultoría TI" },
 ];
 
-const ClientOptions = [
-  { id: 1, name: "Cliente A" },
-  { id: 2, name: "Cliente B" },
-  { id: 3, name: "Cliente C" },
-];
+
 
 export function OpportunityForm({ setClose }: OpportunityFormProps) {
   const { mutate: createOpportunity, isError } = useCreateOpportunity();
+
+  const { data: Client } = useGetNamesClientes();
   const {
     register,
     handleSubmit,
@@ -57,9 +55,9 @@ export function OpportunityForm({ setClose }: OpportunityFormProps) {
           {...register("cliente", { required: true })}
           className="bg-blue-100 border border-gray-300 rounded-md p-2 focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
         >
-          {ClientOptions.map((client) => (
-            <option key={client.id} value={client.name}>
-              {client.name}
+          {Client?.map((cliente: any) => (
+            <option value={cliente}>
+              {cliente}
             </option>
           ))}
         </select>
