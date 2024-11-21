@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/12</span>
+                <span class='fraction'>9/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/3</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/12</span>
+                <span class='fraction'>9/12</span>
             </div>
         
             
@@ -131,22 +131,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -154,6 +147,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -166,7 +160,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -186,15 +186,15 @@ interface ClientListProps {
 }
 &nbsp;
 export function ClientList({ clientes, loading, error }: ClientListProps) {
-  if (loading) {
-    return &lt;Loading /&gt;;
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (loading) {
+<span class="cstat-no" title="statement not covered" >    return &lt;Loading /&gt;;</span>
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (error) {</span>
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (error) {
 <span class="cstat-no" title="statement not covered" >    return &lt;ErrorMessage message={`No se ha podido cargar la información. Error: ${error.message}`} /&gt;;</span>
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (clientes.length === 0) {</span>
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (clientes.length === 0) {
 <span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;div className="p-4 font-poppins"&gt;
         &lt;h2 className="text-2xl font-bold mb-4 text-[#1E2759]"&gt;No hay clientes registrados&lt;/h2&gt;
@@ -202,7 +202,7 @@ export function ClientList({ clientes, loading, error }: ClientListProps) {
     );
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;div className="p-4 font-poppins"&gt;
       &lt;div className="overflow-x-auto"&gt;
         &lt;table className="min-w-full bg-white border border-gray-200 shadow-lg"&gt;
@@ -220,8 +220,8 @@ export function ClientList({ clientes, loading, error }: ClientListProps) {
             &lt;/tr&gt;
           &lt;/thead&gt;
           &lt;tbody className="text-gray-700 text-sm font-light"&gt;
-            {clientes.map(<span class="fstat-no" title="function not covered" >(c</span>liente) =&gt; (
-<span class="cstat-no" title="statement not covered" >              &lt;ClientRow key={cliente.id} c</span>liente={cliente} /&gt;
+            {clientes.map((cliente) =&gt; (
+              &lt;ClientRow key={cliente.id} cliente={cliente} /&gt;
             ))}
           &lt;/tbody&gt;
         &lt;/table&gt;
@@ -235,7 +235,7 @@ export function ClientList({ clientes, loading, error }: ClientListProps) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-11-21T03:04:15.363Z
+                at 2024-11-21T20:36:25.309Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

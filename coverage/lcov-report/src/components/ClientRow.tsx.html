@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">42.1% </span>
+                <span class="strong">78.94% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/19</span>
+                <span class='fraction'>15/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>6/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>1/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">43.75% </span>
+                <span class="strong">87.5% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/16</span>
+                <span class='fraction'>14/16</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -153,25 +153,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -229,12 +229,12 @@ interface ClientRowProps {
   cliente: Client;
 }
 &nbsp;
-export const ClientRow: React.FC&lt;ClientRowProps&gt; = <span class="fstat-no" title="function not covered" >({</span> cliente }) =&gt; {
-  const [isActive, setIsActive] = <span class="cstat-no" title="statement not covered" >useState(cliente.activo);</span>
-  const [isEditing, setIsEditing] = <span class="cstat-no" title="statement not covered" >useState(false);</span>
-  const toggleClientStatus = <span class="cstat-no" title="statement not covered" >useToggleClientStatus();</span>
+export const ClientRow: React.FC&lt;ClientRowProps&gt; = ({ cliente }) =&gt; {
+  const [isActive, setIsActive] = useState(cliente.activo);
+  const [isEditing, setIsEditing] = useState(false);
+  const toggleClientStatus = useToggleClientStatus();
 &nbsp;
-  const handleToggleStatus = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =</span>&gt; {</span>
+  const handleToggleStatus = <span class="fstat-no" title="function not covered" >() =</span>&gt; {
 <span class="cstat-no" title="statement not covered" >    toggleClientStatus.mutate(</span>
       { id: cliente.id, activo: !isActive },
       {
@@ -245,12 +245,12 @@ export const ClientRow: React.FC&lt;ClientRowProps&gt; = <span class="fstat-no" 
     );
   };
 &nbsp;
-  const handleOpenEditForm = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >setIsEditing(true);</span></span>
-  const handleCloseEditForm = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >setIsEditing(false);</span></span>
+  const handleOpenEditForm = <span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >setIsEditing(true);</span>
+  const handleCloseEditForm = <span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >setIsEditing(false);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;&gt;
-      &lt;tr className={`border-b border-gray-200 hover:bg-gray-100 ${!isActive ? "text-red-500" : "text-black"}`}&gt;
+      &lt;tr className={`border-b border-gray-200 hover:bg-gray-100 ${!isActive ? <span class="branch-0 cbranch-no" title="branch not covered" >"text-red-500" </span>: "text-black"}`}&gt;
         &lt;td className="py-3 px-6 text-left"&gt;{cliente.nit}&lt;/td&gt;
         &lt;td className="py-3 px-6 text-left"&gt;
           &lt;Link className="hover:text-blue-500" to={`/detalles-clientes/${cliente.nit}`} state={cliente}&gt;
@@ -266,7 +266,7 @@ export const ClientRow: React.FC&lt;ClientRowProps&gt; = <span class="fstat-no" 
           {isActive ? (
             &lt;span className="text-green-500 font-bold"&gt;Sí&lt;/span&gt;
           ) : (
-            &lt;span className="text-red-500 font-bold"&gt;No&lt;/span&gt;
+<span class="branch-1 cbranch-no" title="branch not covered" >            &lt;span className="text-red-500 font-bold"&gt;No&lt;/span&gt;</span>
           )}
         &lt;/td&gt;
         &lt;td className="py-3 px-6 text-center flex justify-center space-x-2"&gt;
@@ -280,17 +280,17 @@ export const ClientRow: React.FC&lt;ClientRowProps&gt; = <span class="fstat-no" 
           &lt;button
             onClick={handleToggleStatus}
             className={`font-bold py-1 px-2 rounded inline-flex items-center ${
-              isActive ? "bg-red-500 hover:bg-red-600" : "bg-green-500 hover:bg-green-600"
+              isActive ? "bg-red-500 hover:bg-red-600" : <span class="branch-1 cbranch-no" title="branch not covered" >"bg-green-500 hover:bg-green-600"</span>
             } text-white`}
           &gt;
-            &lt;FontAwesomeIcon icon={isActive ? faToggleOff : faToggleOn} className="mr-1" /&gt;
-            {isActive ? "Inactivar" : "Activar"}
+            &lt;FontAwesomeIcon icon={isActive ? faToggleOff : <span class="branch-1 cbranch-no" title="branch not covered" >faToggleOn}</span> className="mr-1" /&gt;
+            {isActive ? "Inactivar" : <span class="branch-1 cbranch-no" title="branch not covered" >"Activar"}</span>
           &lt;/button&gt;
         &lt;/td&gt;
       &lt;/tr&gt;
 &nbsp;
       {isEditing &amp;&amp; (
-        &lt;UpdateClienteForm cliente={cliente} onClose={handleCloseEditForm} /&gt;
+<span class="branch-1 cbranch-no" title="branch not covered" >        &lt;UpdateClienteForm cliente={cliente} onClose={handleCloseEditForm} /&gt;</span>
       )}
     &lt;/&gt;
   );
@@ -301,7 +301,7 @@ export const ClientRow: React.FC&lt;ClientRowProps&gt; = <span class="fstat-no" 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-11-21T03:04:15.363Z
+                at 2024-11-21T20:36:25.309Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

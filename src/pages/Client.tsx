@@ -3,6 +3,7 @@ import { ClientList } from '../components/ClientList';
 import { Link } from 'react-router-dom';
 import { Main } from '../layout/Main';
 import { Client } from '../core/interface/client';
+import axios from 'axios';
 
 export function Cliente() {
     const [clientes, setClientes] = useState<Client[]>([]);
@@ -10,38 +11,19 @@ export function Cliente() {
     const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
-        // Simula una llamada a la API para obtener los clientes
-        setTimeout(() => {
-            try {
-                const fetchedClientes: Client[] = [
-                    {
-                        id: 1,
-                        nombre: "Juan Pérez",
-                        telefono: "123456789",
-                        direccion: "Calle Falsa 123",
-                        nit: "1234567890",
-                        ciudad: "Ciudad Ejemplo",
-                        pais: "País Ejemplo",
-                        correoCorporativo: "juan.perez@empresa.com",
-                        activo: true,
-                        contactos: [
-                            {
-                                nombre: "Carlos",
-                                apellido: "Gómez",
-                                correo: "carlos.gomez@empresa.com",
-                                telefono: "987654321"
-                            }
-                        ]
-                    }
-                ];
-                setClientes(fetchedClientes);
+        axios.get('https://dragons-final-api.onrender.com/clientes')
+            .then(response => {
+                setClientes(response.data);
                 setLoading(false);
-            } catch (err) {
-                setError(err as Error);
+            })
+            .catch(err => {
+                setError(err);
                 setLoading(false);
-            }
-        }, 1000);
+            });
     }, []);
+
+    const noClientsMessage = "No hay clientes registrados";
+    const errorMessage = "No se ha podido cargar la información";
 
     return (
         <Main>
@@ -56,7 +38,15 @@ export function Cliente() {
                     </Link>
                 </div>
             </div>
-            <ClientList clientes={clientes} loading={loading} error={error} />
+            {loading ? (
+                <div aria-label="loading">Cargando...</div>
+            ) : error ? (
+                <div>{errorMessage}</div>
+            ) : clientes.length === 0 ? (
+                <div>{noClientsMessage}</div>
+            ) : (
+                <ClientList clientes={clientes} loading={loading} error={error} />
+            )}
         </Main>
     );
 }
