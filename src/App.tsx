@@ -1,3 +1,4 @@
+import React from 'react';
 import { DetailClientTable } from "./components/DetailClientTable";
 import { Client } from "./core/interface/client";
 
@@ -11,6 +12,14 @@ const cliente: Client = {
   pais: "País Ejemplo",
   correoCorporativo: "juan.perez@empresa.com",
   activo: true,
+  contactos: [
+    {
+      nombre: "Carlos",
+      apellido: "Gómez",
+      correo: "carlos.gomez@empresa.com",
+      telefono: "987654321"
+    }
+  ]
 };
 
 function App() {

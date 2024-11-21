@@ -1,7 +1,7 @@
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faBars } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -28,7 +28,6 @@ export function Header() {
         } w-full md:flex md:items-center md:w-auto mt-2 md:mt-0`}
       >
         <div className="flex flex-col md:flex-row md:space-x-4 md:order-1 space-y-2 md:space-y-0">
-          
           <Link
             to="/"
             className="focus:bg-primary active:bg-primary text-light p-2 rounded"
@@ -41,7 +40,6 @@ export function Header() {
           >
             Oportunidades
           </Link>
-          
           <Link
             to="/dashboard"
             className="focus:bg-primary active:bg-primary text-light p-2 rounded"
@@ -51,7 +49,7 @@ export function Header() {
         </div>
       </nav>
 
-      <div className="flex items-center mt-2 md:mt-0 md:order-3" >
+      <div className="flex items-center mt-2 md:mt-0 md:order-3">
         <FontAwesomeIcon icon={faUser} className="h-5 w-5 text-light" />
         <span className="ml-2 pr-2 font-bold">Dragon24</span>
       </div>

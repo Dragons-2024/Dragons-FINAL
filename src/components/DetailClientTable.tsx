@@ -1,3 +1,4 @@
+import React from 'react';
 import { Client } from "../core/interface/client";
 
 export function DetailClientTable({ cliente }: { cliente: Client }) {

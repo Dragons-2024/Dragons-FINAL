@@ -1,10 +1,10 @@
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faToggleOn, faToggleOff } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import { Client } from "../core/interface/client";
 import { useToggleClientStatus } from "../hooks/useToggleClientStatus";
-import {UpdateClienteForm} from "./UpdateClienteForm";
+import { UpdateClienteForm } from "./UpdateClienteForm";
 
 interface ClientRowProps {
   cliente: Client;
