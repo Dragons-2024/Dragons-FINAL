@@ -1,26 +1,172 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1732149049120" clover="3.2.0">
-  <project timestamp="1732149049120" name="All files">
-    <metrics statements="9" coveredstatements="9" conditionals="7" coveredconditionals="5" methods="3" coveredmethods="3" elements="19" coveredelements="17" complexity="0" loc="9" ncloc="9" packages="2" files="2" classes="2"/>
+<coverage generated="1732158255474" clover="3.2.0">
+  <project timestamp="1732158255474" name="All files">
+    <metrics statements="107" coveredstatements="58" conditionals="66" coveredconditionals="7" methods="32" coveredmethods="9" elements="205" coveredelements="74" complexity="0" loc="107" ncloc="107" packages="7" files="13" classes="13"/>
     <package name="src">
-      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="App.tsx" path="C:\Users\user\OneDrive\Desktop\landing-page\Dragons-FINAL\src\App.tsx">
-        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="1" type="stmt"/>
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="2" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
         <line num="26" count="1" type="stmt"/>
         <line num="33" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components">
-      <metrics statements="4" coveredstatements="4" conditionals="7" coveredconditionals="5" methods="2" coveredmethods="2"/>
-      <file name="DetailClientTable.tsx" path="C:\Users\user\OneDrive\Desktop\landing-page\Dragons-FINAL\src\components\DetailClientTable.tsx">
-        <metrics statements="4" coveredstatements="4" conditionals="7" coveredconditionals="5" methods="2" coveredmethods="2"/>
+    <package name="src.api">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="axios.ts" path="C:\Users\user\OneDrive\Desktop\landing-page\Dragons-FINAL\src\api\axios.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components">
+      <metrics statements="52" coveredstatements="30" conditionals="36" coveredconditionals="7" methods="15" coveredmethods="5"/>
+      <file name="ClientList.tsx" path="C:\Users\user\OneDrive\Desktop\landing-page\Dragons-FINAL\src\components\ClientList.tsx">
+        <metrics statements="12" coveredstatements="6" conditionals="3" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <line num="2" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
-        <line num="58" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="18" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="22" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+      </file>
+      <file name="ClientRow.tsx" path="C:\Users\user\OneDrive\Desktop\landing-page\Dragons-FINAL\src\components\ClientRow.tsx">
+        <metrics statements="16" coveredstatements="7" conditionals="12" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+      </file>
+      <file name="DetailClientTable.tsx" path="C:\Users\user\OneDrive\Desktop\landing-page\Dragons-FINAL\src\components\DetailClientTable.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="7" coveredconditionals="5" methods="2" coveredmethods="2"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+      </file>
+      <file name="ErrorMessage.tsx" path="C:\Users\user\OneDrive\Desktop\landing-page\Dragons-FINAL\src\components\ErrorMessage.tsx">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+      </file>
+      <file name="Header.tsx" path="C:\Users\user\OneDrive\Desktop\landing-page\Dragons-FINAL\src\components\Header.tsx">
+        <metrics statements="8" coveredstatements="7" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+      </file>
+      <file name="Loading.tsx" path="C:\Users\user\OneDrive\Desktop\landing-page\Dragons-FINAL\src\components\Loading.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+      </file>
+      <file name="UpdateClienteForm.tsx" path="C:\Users\user\OneDrive\Desktop\landing-page\Dragons-FINAL\src\components\UpdateClienteForm.tsx">
+        <metrics statements="8" coveredstatements="3" conditionals="12" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.hooks">
+      <metrics statements="8" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
+      <file name="useToggleClientStatus.ts" path="C:\Users\user\OneDrive\Desktop\landing-page\Dragons-FINAL\src\hooks\useToggleClientStatus.ts">
+        <metrics statements="8" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.layout">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="Main.tsx" path="C:\Users\user\OneDrive\Desktop\landing-page\Dragons-FINAL\src\layout\Main.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.pages">
+      <metrics statements="17" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
+      <file name="Client.tsx" path="C:\Users\user\OneDrive\Desktop\landing-page\Dragons-FINAL\src\pages\Client.tsx">
+        <metrics statements="17" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="46" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.services">
+      <metrics statements="21" coveredstatements="5" conditionals="30" coveredconditionals="0" methods="8" coveredmethods="0"/>
+      <file name="ClienteServices.ts" path="C:\Users\user\OneDrive\Desktop\landing-page\Dragons-FINAL\src\services\ClienteServices.ts">
+        <metrics statements="21" coveredstatements="5" conditionals="30" coveredconditionals="0" methods="8" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="17" count="0" type="cond" truecount="0" falsecount="10"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="26" count="0" type="cond" truecount="0" falsecount="10"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="34" count="0" type="cond" truecount="0" falsecount="10"/>
       </file>
     </package>
   </project>

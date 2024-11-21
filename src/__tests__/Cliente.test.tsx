@@ -8,7 +8,7 @@ import {Cliente} from '../pages/Client';
 
 test('renders Lista de Clientes text', () => {
   render(
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Cliente />
     </BrowserRouter>
   );
@@ -18,7 +18,7 @@ test('renders Lista de Clientes text', () => {
 
 test('renders Crear Cliente link', () => {
   render(
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Cliente />
     </BrowserRouter>
   );
