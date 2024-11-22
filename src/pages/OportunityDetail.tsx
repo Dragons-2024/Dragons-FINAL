@@ -29,7 +29,7 @@ export function OportunityDetail(){
         onClick={()=>setWindow(true)}>Crear Seguimiento</button>
         </div>
         
-        <ActivityWindowDialogue name={BusinessName} setclose={setclose} open={Window}/>
+        <ActivityWindowDialogue oportunity={oportunity} setclose={setclose} open={Window}/>
         <ActivityTable oportunity={oportunity}/>
        </Main>
     );
