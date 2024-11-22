@@ -56,7 +56,7 @@ export function ClientDetailActivities(oportunity: Oportunidad) {
                                     <td className="py-3 px-6 text-center whitespace-nowrap">{`${activity.ContactDate}`}</td>
                                     <td className="py-3 px-6 text-center whitespace-nowrap">
                                         <ul>
-                                            {activity.Client.map((client) => (
+                                            {activity.Client?.map((client) => (
                                                 <li key={client.name}>{client.name}</li>
                                             ))}
                                         </ul>

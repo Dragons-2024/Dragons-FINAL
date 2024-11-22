@@ -8,7 +8,7 @@ export type ActivityType = {
     id:number;
     ContactType:string;
     ContactDate:Date;
-    Client: {
+    Client?: {
       name: string;
     }[];
     ContactUser:string;
@@ -19,9 +19,6 @@ export type ActivityType = {
   export type ActivityFormType = {
     ContactType:string;
     ContactDate:Date;
-    Client: {
-      name: string;
-    }[];
     ContactUser:string;
     Description:string;
   };
