@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Main } from '../layout/Main';
 import { ClientList } from '../components/ClientList';
 import { Client } from '../core/interface/client';
