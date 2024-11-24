@@ -1,6 +1,9 @@
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useCreateActivity } from "../hooks/useCreateActivity";
 import { ActivityFormType, HeaderProps } from "../core/interface/Activities";
+import { Oportunidad } from "../core/interface/opportunity";
+import { useGetClientOportunity } from "../hooks/useGetClientOportunity";
+import { Contacto } from "../core/interface/client";
 
 const TypeContact: HeaderProps[] = [
   { id: 1, name: "Llamada" },
@@ -9,31 +12,35 @@ const TypeContact: HeaderProps[] = [
 ];
 
 interface ActivityFormProps {
-  BusinessName: string;
+  oportunity: Oportunidad;
   setclose: () => void;
 }
 
-export function ActivityForm({ BusinessName, setclose }: ActivityFormProps) {
+export function ActivityForm({ oportunity, setclose }: ActivityFormProps) {
   const { mutate: CreateActivity, isError } = useCreateActivity();
+  const {data:ClientOportunity}=useGetClientOportunity(oportunity.cliente);
+  let ContactNames:{name:string}[]=[];
+if(ClientOportunity && ClientOportunity.length > 0 && ClientOportunity[0].contactos){
+ ContactNames=ClientOportunity[0].contactos?.map((contacts:Contacto)=>({name:contacts.nombre}))
+}
+
+console.log(ContactNames);
+
   const {
     register,
     handleSubmit,
-    control,
     reset,
     formState: { errors },
   } = useForm<ActivityFormType>();
 
-  const { fields, append, remove } = useFieldArray({
-    name: "Client",
-    control,
-  });
 
   const onSubmit = (data: ActivityFormType) => {
     console.log("Activity Information: ", data);
     CreateActivity({
       id: Math.floor(Math.random() * 1000),
-      BusinessName: BusinessName,
-      ...data
+      BusinessName: oportunity.nombreNegocio,
+      ...data,
+      Client:ContactNames
     });
     setclose();
     reset();
@@ -79,48 +86,7 @@ export function ActivityForm({ BusinessName, setclose }: ActivityFormProps) {
           <p className="text-[#FF0000] text-xs mx-1">Campo obligatorio</p>
         )}
       </section>
-
-      <section className="w-full">
-        <div>
-          <label
-            htmlFor="Client"
-            className="block text-gray-700 font-semibold mb-2"
-          >
-            Clientes Asociados:
-          </label>
-          <button
-            type="button"
-            onClick={() => append({ name: "" })}
-            className="mt-2 px-4 py-2 my-3 bg-[#4A5FD9] text-white rounded-md 
-          hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          >
-            Añadir Cliente
-          </button>
-          {fields.map((field, index) => (
-            <div key={field.id} className="flex items-center space-x-2 mb-2">
-              <input
-                type="text"
-                id="Client"
-                placeholder="Nombre del Cliente"
-                {...register(`Client.${index}.name`, { required: true })}
-                className={`flex-1 bg-blue-50 border ${
-                  errors.Client && errors.Client[index]?.name
-                    ? "border-red-500"
-                    : "border-gray-300"
-                } rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400`}
-              />
-              <button
-                type="button"
-                onClick={() => remove(index)}
-                className="text-red-500 hover:text-red-700 focus:outline-none hover:bg-red-200 rounded-full p-1"
-                aria-label="Eliminar Cliente"
-              >
-                <img src="../src/assets/delete.svg" alt="Eliminar" />
-              </button>
-            </div>
-          ))}
-        </div>
-      </section>
+          
 
       <section className="flex flex-col gap-2">
         <label htmlFor="User" className="text-gray-700 font-semibold ">
