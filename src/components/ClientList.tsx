@@ -1,4 +1,3 @@
-import React from 'react';
 import { Client } from '../core/interface/client';
 import { Loading } from './Loading';
 import { ErrorMessage } from './ErrorMessage';
