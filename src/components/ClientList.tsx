@@ -1,15 +1,16 @@
-import { Client } from '../core/interface/client';
-import { Loading } from './Loading';
-import { ErrorMessage } from './ErrorMessage';
+import { ClientRow } from "../components/ClientRow";
+import { useGetClientes } from "../hooks/useGetCliente";
+import { Loading } from "../components/Loading";
+import { ErrorMessage } from "../components/ErrorMessage";
+import { Client } from "../core/interface/client";
+import React from "react";
 
-interface ClientListProps {
-  clientes: Client[];
-  loading: boolean;
-  error: Error | null;
-}
 
-export function ClientList({ clientes, loading, error }: ClientListProps) {
-  if (loading) {
+export const ClientList: React.FC = () => {
+  
+  const { data: clientesData, isLoading, error } = useGetClientes();
+
+  if (isLoading) {
     return <Loading />;
   }
 
@@ -17,7 +18,7 @@ export function ClientList({ clientes, loading, error }: ClientListProps) {
     return <ErrorMessage message={`No se ha podido cargar la información. Error: ${error.message}`} />;
   }
 
-  if (clientes.length === 0) {
+  if (!clientesData || clientesData.length === 0) {
     return (
       <div className="p-4 font-poppins">
         <h2 className="text-2xl font-bold mb-4 text-[#1E2759]">No hay clientes registrados</h2>
@@ -26,7 +27,8 @@ export function ClientList({ clientes, loading, error }: ClientListProps) {
   }
 
   return (
-    <div className="p-4 font-poppins" data-testid="client-list">
+    <div className="p-4 font-poppins">
+      
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-200 shadow-lg">
           <thead>
@@ -43,22 +45,12 @@ export function ClientList({ clientes, loading, error }: ClientListProps) {
             </tr>
           </thead>
           <tbody className="text-gray-700 text-sm font-light">
-            {clientes.map((cliente) => (
-              <tr key={cliente.id}>
-                <td className="py-3 px-6 text-center">{cliente.nit}</td>
-                <td className="py-3 px-6 text-center">{cliente.nombre}</td>
-                <td className="py-3 px-6 text-center">{cliente.direccion}</td>
-                <td className="py-3 px-6 text-center">{cliente.ciudad}</td>
-                <td className="py-3 px-6 text-center">{cliente.pais}</td>
-                <td className="py-3 px-6 text-center">{cliente.telefono}</td>
-                <td className="py-3 px-6 text-center">{cliente.correoCorporativo}</td>
-                <td className="py-3 px-6 text-center">{cliente.activo ? 'Sí' : 'No'}</td>
-                <td className="py-3 px-6 text-center">Acciones</td>
-              </tr>
+            {clientesData.map((cliente: Client) => (
+              <ClientRow key={cliente.id} cliente={cliente} />
             ))}
           </tbody>
         </table>
       </div>
     </div>
   );
-}
+};
