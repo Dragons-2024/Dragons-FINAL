@@ -102,7 +102,7 @@ export function ActivityTable({oportunity}:{oportunity:Oportunidad}) {
                                     
                                     <td className="py-3 px-6 text-center">
                                     <ul>
-                                        {activity.Client.map((client)=>(
+                                        {activity.Client?.map((client)=>(
                                         
                                           <li key={client.name}>
                                             {client.name}

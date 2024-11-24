@@ -20,9 +20,11 @@ export function ActivityForm({ oportunity, setclose }: ActivityFormProps) {
   const { mutate: CreateActivity, isError } = useCreateActivity();
   const {data:ClientOportunity}=useGetClientOportunity(oportunity.cliente);
   let ContactNames:{name:string}[]=[];
-if(ClientOportunity && ClientOportunity.length > 0){
- ContactNames=ClientOportunity[0].contactos.map((contacts:Contacto)=>({name:contacts.nombre}))
+if(ClientOportunity && ClientOportunity.length > 0 && ClientOportunity[0].contactos){
+ ContactNames=ClientOportunity[0].contactos?.map((contacts:Contacto)=>({name:contacts.nombre}))
 }
+
+console.log(ContactNames);
 
   const {
     register,
