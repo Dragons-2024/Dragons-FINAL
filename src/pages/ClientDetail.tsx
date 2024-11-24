@@ -1,7 +1,7 @@
 // src/pages/ClientDetail.tsx
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { Client } from "../core/interface/client"; // Asegúrate de importar 'Client'
+import { Client } from "../core/interface/client"; 
 import { DetailClientTable } from "../components/DetailClientTable";
 import { Main } from "../layout/Main";
 import { ClientOportunityList } from "../components/ClientOportunityList";

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1732303153505" clover="3.2.0">
+  <project timestamp="1732303153505" name="All files">
+    <metrics statements="42" coveredstatements="41" conditionals="7" coveredconditionals="5" methods="11" coveredmethods="10" elements="60" coveredelements="56" complexity="0" loc="42" ncloc="42" packages="3" files="6" classes="6"/>
+    <package name="components">
+      <metrics statements="24" coveredstatements="23" conditionals="7" coveredconditionals="5" methods="6" coveredmethods="5"/>
+      <file name="ClientList.tsx" path="C:\Users\user\OneDrive\Desktop\landing-page\Dragons-FINAL\src\components\ClientList.tsx">
+        <metrics statements="11" coveredstatements="11" conditionals="5" coveredconditionals="4" methods="2" coveredmethods="2"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="12" count="10" type="stmt"/>
+        <line num="13" count="10" type="cond" truecount="1" falsecount="0"/>
+        <line num="14" count="5" type="stmt"/>
+        <line num="17" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="21" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
+        <line num="47" count="3" type="stmt"/>
+      </file>
+      <file name="ErrorMessage.tsx" path="C:\Users\user\OneDrive\Desktop\landing-page\Dragons-FINAL\src\components\ErrorMessage.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+      </file>
+      <file name="Header.tsx" path="C:\Users\user\OneDrive\Desktop\landing-page\Dragons-FINAL\src\components\Header.tsx">
+        <metrics statements="8" coveredstatements="7" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="10" type="stmt"/>
+        <line num="9" count="10" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+      </file>
+      <file name="Loading.tsx" path="C:\Users\user\OneDrive\Desktop\landing-page\Dragons-FINAL\src\components\Loading.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="5" type="stmt"/>
+      </file>
+    </package>
+    <package name="layout">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="Main.tsx" path="C:\Users\user\OneDrive\Desktop\landing-page\Dragons-FINAL\src\layout\Main.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="10" type="stmt"/>
+        <line num="4" count="10" type="stmt"/>
+      </file>
+    </package>
+    <package name="pages">
+      <metrics statements="15" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+      <file name="Client.tsx" path="C:\Users\user\OneDrive\Desktop\landing-page\Dragons-FINAL\src\pages\Client.tsx">
+        <metrics statements="15" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="10" type="stmt"/>
+        <line num="9" count="10" type="stmt"/>
+        <line num="10" count="10" type="stmt"/>
+        <line num="12" count="10" type="stmt"/>
+        <line num="13" count="5" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="24" count="10" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

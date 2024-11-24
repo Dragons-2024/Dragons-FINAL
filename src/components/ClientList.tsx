@@ -3,6 +3,7 @@ import { useGetClientes } from "../hooks/useGetCliente";
 import { Loading } from "../components/Loading";
 import { ErrorMessage } from "../components/ErrorMessage";
 import { Client } from "../core/interface/client";
+import React from "react";
 
 
 export const ClientList: React.FC = () => {
