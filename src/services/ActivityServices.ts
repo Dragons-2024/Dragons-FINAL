@@ -26,3 +26,12 @@ export const deleteActivity= async (id: number): Promise<void> => {
       throw new Error("Error al eliminar la oportunidad");
   }
 };
+
+export const PatchActivity = async (id: number, activity: ActivityType): Promise<void> => {
+  try {
+      await axiosApi.patch(`/activities/${id}`, activity);
+  } catch (error) {
+      console.log(error);
+      throw new Error("Error al actualizar la oportunidad");
+  }
+}
