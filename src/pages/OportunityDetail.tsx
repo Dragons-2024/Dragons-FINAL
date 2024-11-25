@@ -10,11 +10,7 @@ export function OportunityDetail(){
     const location=useLocation();
     const oportunity=location.state as Oportunidad;
     const [Window,setWindow]=useState(false);
-    let BusinessName:string="";
-
-    if(oportunity!==undefined){
-      BusinessName=oportunity.nombreNegocio;
-    }
+    
 
     function setclose(){
       setWindow(false);
